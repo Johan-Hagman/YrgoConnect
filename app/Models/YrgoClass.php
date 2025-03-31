@@ -2,13 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class YrgoClass extends Model
 {
     use HasFactory;
 
-    protected $table = 'classes';
-    public $timestamps = false;
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+
+    public function competences()
+    {
+        return $this->hasMany(Competence::class);
+    }
 }

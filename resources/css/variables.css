@@ -1,0 +1,43 @@
+:root {
+    /* Base colors */
+    --color-red: #e51236;
+    --color-black: #121212;
+    --color-blue: #001a52;
+
+    /* Grey scale */
+    --color-grey-50: #535c5f;
+    --color-grey-40: #848f94;
+    --color-grey-30: #c1c9cd;
+    --color-grey-20: #e4e9eb;
+    --color-grey-10: #f6f8f8;
+
+    /* Mobile first */
+    --text-title-1: 32px;
+    --text-title-2: 32px;
+    --text-title-3: 32px;
+    --text-title-4: 32px;
+    --text-title-5: 24px;
+    --text-body: 16px;
+
+    --text-link: 16px;
+    --text-button: 16px;
+    --text-subtitle: 16px;
+
+    /* Font weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+}
+
+/* Desktop overrides */
+@media (min-width: 768px) {
+    :root {
+        --text-title-1: 96px;
+        --text-title-2: 64px;
+        --text-title-3: 48px;
+        --text-title-4: 32px;
+        --text-title-5: 32px;
+        --text-body: 20px;
+    }
+}

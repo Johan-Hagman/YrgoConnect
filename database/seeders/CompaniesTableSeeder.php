@@ -6,7 +6,7 @@ use App\Models\Company;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
-class CompanySeeder extends Seeder
+class CompaniesTableSeeder extends Seeder
 {
     public function run()
     {

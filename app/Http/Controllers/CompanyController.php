@@ -21,14 +21,16 @@ class CompanyController extends Controller
             'website_url' => 'nullable|url',
             'description' => 'nullable|string',
             'attendance' => 'nullable|boolean',
-            'user_id' => 'required|exists:users,id'
         ]);
 
         $company = new Company();
-        $company->user_id = $request->auth()->user()->id;
+        $company->user_id = $request->user()->id;
+        $company->image_url = $request->image_url;
+        $company->city = $request->city;
+        $company->contact_name = $request->contact_name;
         $company->website_url = $request->website_url;
         $company->description = $request->description;
-        $company->linkedin_url = $request->linkedin_url;
+        $company->attendance = $request->attendance ?? false;
         $company->save();
 
         return redirect()->route('companies.index');

@@ -26,8 +26,8 @@ class StudentController extends Controller
         ]);
 
         $student = new Student();
+        $student->user_id = $request->user()->id;
         $student->class_id = $request->class_id;
-        $student->user_id = $request->auth()->user()->id;
         $student->image_url = $request->image_url;
         $student->cv_url = $request->cv_url;
         $student->linkedin_url = $request->linkedin_url;

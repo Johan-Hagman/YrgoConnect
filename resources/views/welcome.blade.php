@@ -15,39 +15,19 @@
     @endif
 </head>
 <body>
-    <header class="site-header">
-        <div class="logo">
-            <img src="{{ asset('/icons/bomarke.png') }}" alt="YrgoConnect logotyp" />
-        </div>
+    <x-header />
     
-        <div class="header-icons">
-            @if (Route::has('login'))
-                @auth
-                    <a href="{{ url('/dashboard') }}">Dashboard</a>
-                @else
-                    <div class="dropdown">
-                        <button id="dropdownToggle" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset('/icons/account_circle.svg') }}" alt="Användarmeny" class="dropdown-icon" />
-                        </button>
-    
-                        <ul id="dropdownMenu" class="dropdown-menu hidden">
-                            <li><a href="{{ route('login') }}">Logga in</a></li>
-                            @if (Route::has('register'))
-                                <li><a href="{{ route('register') }}">Registrera</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                @endauth
-            @endif
-        </div>
-    </header>
-    
-    
+    <x-hero-section /> 
+
+    <x-event-info />
 
     @if (Route::has('login'))
         <div></div>
     @endif
+
 </body>
-@include('components.footer')
+
+<x-footer />
+
 </html>
 

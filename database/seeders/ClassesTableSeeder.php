@@ -7,6 +7,7 @@ use App\Models\YrgoClass;
 
 class ClassesTableSeeder extends Seeder
 {
+
     public function run()
     {
         YrgoClass::create(['name' => 'Webbutvecklare']);

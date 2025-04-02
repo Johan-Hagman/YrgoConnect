@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class YrgoClass extends Model
 {
+    protected $table = 'classes';
+
     use HasFactory;
 
     public function students()

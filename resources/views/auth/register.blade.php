@@ -8,13 +8,13 @@
 
             <div class="mt-2 flex space-x-4">
                 <label class="inline-flex items-center">
-                    <input type="radio" name="role" value="student" class="text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
+                    <input type="radio" name="role" value="Student" class="text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
                     <span class="ml-2">Student</span>
                 </label>
 
                 <label class="inline-flex items-center">
-                    <input type="radio" name="role" value="company" class="text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
-                    <span class="ml-2">Company</span>
+                    <input type="radio" name="role" value="Företag" class="text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
+                    <span class="ml-2">Företag</span>
                 </label>
             </div>
 

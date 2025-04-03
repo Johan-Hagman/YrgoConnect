@@ -16,6 +16,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'name' => 'nullable|string|max:255',
             'image_url' => 'nullable|url',
             'website_url' => 'nullable|url',
             'description' => 'nullable|string',
@@ -26,6 +27,7 @@ class StudentController extends Controller
         ]);
 
         $student = new Student();
+        $student->name = $request->name;
         $student->user_id = $request->user()->id;
         $student->class_id = $request->class_id;
         $student->image_url = $request->image_url;

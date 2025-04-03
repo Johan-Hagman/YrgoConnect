@@ -16,6 +16,7 @@ class StudentsTableSeeder extends Seeder
         $faker = Faker::create();
 
         Student::create([
+            'name' => 'Anna Dahlberg',
             'image_url' => 'https://i.etsystatic.com/22616135/r/il/ac4b90/5756479891/il_1080xN.5756479891_6iui.jpg',
             'website_url' => 'https://github.com/anna-dahlberg',
             'description' => 'Hej, jag heter Anna är 26 år och intresserad av Frontend-utveckling',
@@ -26,6 +27,7 @@ class StudentsTableSeeder extends Seeder
         ]);
 
         Student::create([
+            'name' => 'Johan Hagman',
             'image_url' => $faker->imageUrl(),
             'website_url' => $faker->url,
             'description' => $faker->paragraph,

@@ -15,6 +15,7 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'name' => 'nullable|string|max:255',
             'image_url' => 'nullable|url',
             'city' => 'nullable|string',
             'contact_name' => 'nullable|string',
@@ -24,6 +25,7 @@ class CompanyController extends Controller
         ]);
 
         $company = new Company();
+        $company->name = $request->name;
         $company->user_id = $request->user()->id;
         $company->image_url = $request->image_url;
         $company->city = $request->city;

@@ -13,6 +13,7 @@ class CompaniesTableSeeder extends Seeder
         $faker = Faker::create();
 
         Company::create([
+            'name' => $faker->name(),
             'image_url' => $faker->imageUrl(),
             'website_url' => $faker->url,
             'description' => $faker->paragraph,
@@ -22,6 +23,7 @@ class CompaniesTableSeeder extends Seeder
 
 
         Company::create([
+            'name' => $faker->name(),
             'image_url' => $faker->imageUrl(),
             'website_url' => $faker->url,
             'description' => $faker->paragraph,

@@ -4,10 +4,10 @@
 
         <!-- Role Selection -->
         <div>
-            <x-input-label :value="__('Register as')" />
+            <x-input-label :value="__('Jag är')" />
 
             <div class="mt-2 flex space-x-4">
-                <label class="inline-flex items-center">
+                <label class="inline-flex items-center"> Jag är
                     <input type="radio" name="role" value="Student" class="text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
                     <span class="ml-2">Student</span>
                 </label>

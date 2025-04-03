@@ -9,6 +9,8 @@ class Competence extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function classModel()
     {
         return $this->belongsTo(YrgoClass::class);

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class MultiStepRegistration extends Component
 {
+    use WithFileUploads;
+
     public $step = 1;
     public $user_id;
 
@@ -17,35 +20,34 @@ class MultiStepRegistration extends Component
     public $email, $password, $password_confirmation, $role;
 
     // Company-data
-    public $company_name, $image_url, $city, $contact_name, $website_url;
-    public $class = [], $competences = [], $description, $attendance, $terms;
+    public $company_name, $image, $city, $contact_name, $website_url;
+    public $class = [], $competences = [], $description;
+    public $event_attendance = false, $accept_terms = false;
 
     protected $rules = [
-        // Steg 1: User
+        // Steg 1
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8|confirmed',
-        'role_id' => 'required|exists:roles,id',
+        'role' => 'required|in:student,company',
 
-        // Steg 2 & 3: Company
-        'name' => 'required_if:role,company|string',
-        'image_url' => 'nullable|url',
+        // Steg 2-3 (om company)
+        'company_name' => 'required_if:role,company|string',
+        'image' => 'nullable|image|max:1024',
         'city' => 'nullable|string',
-        'contact_name' => 'nullable|string',
+        'contact_name' => 'required_if:role,company|string',
         'website_url' => 'nullable|url',
         'class' => 'required_if:role,company|array',
         'competences' => 'nullable|array',
         'description' => 'nullable|string|max:240',
-        'attendance' => 'boolean',
-        'terms' => 'required',
+        'event_attendance' => 'boolean',
+        'accept_terms' => 'accepted',
     ];
 
     public function registerUser()
     {
-        $this->validate([
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
-            'role_id' => 'required|exists:roles,id',,
-        ]);
+        $this->validateOnly('email');
+        $this->validateOnly('password');
+        $this->validateOnly('role');
 
         $user = User::create([
             'email' => $this->email,
@@ -73,18 +75,20 @@ class MultiStepRegistration extends Component
     {
         $this->validate();
 
+        $imagePath = $this->image ? $this->image->store('logos', 'public') : null;
+
         if ($this->role === 'company') {
             Company::create([
                 'user_id' => $this->user_id,
-                'name' => $this->name,
-                'image_url' => $this->image_url,
+                'name' => $this->company_name,
+                'image_url' => $imagePath,
                 'city' => $this->city,
                 'contact_name' => $this->contact_name,
                 'website_url' => $this->website_url,
                 'class' => json_encode($this->class),
                 'competences' => json_encode($this->competences),
                 'description' => $this->description,
-                'attendance' => $this->attendance,
+                'attendance' => $this->event_attendance,
             ]);
         }
 

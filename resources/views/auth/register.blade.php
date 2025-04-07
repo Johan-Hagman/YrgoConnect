@@ -2,6 +2,26 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
+        <!-- Role Selection -->
+        <div>
+            <x-input-label :value="__('Register as')" />
+
+            <div class="mt-2 flex space-x-4">
+                <label class="inline-flex items-center">
+                    <input type="radio" name="role" value="student" class="text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
+                    <span class="ml-2">Student</span>
+                </label>
+
+                <label class="inline-flex items-center">
+                    <input type="radio" name="role" value="company" class="text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
+                    <span class="ml-2">Company</span>
+                </label>
+            </div>
+
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+        
+
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />

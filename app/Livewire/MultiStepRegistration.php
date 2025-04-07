@@ -50,6 +50,7 @@ class MultiStepRegistration extends Component
         // Step 2 - Student
         'name' => 'required_if:role,student|string|max:255',
         'class' => 'required_if:role,student|in:Webbutvecklare,Digital Designer',
+        'website_url' => 'required_if:role,student|url',
         'competences' => 'required_if:role,student|array',
         'competences.*' => 'string',
         'cv' => 'nullable|file|mimes:pdf|max:2048',
@@ -115,7 +116,20 @@ class MultiStepRegistration extends Component
                 'attendance' => $this->event_attendance,
             ]);
         } elseif ($this->role === 'student') {
-            // More logic coming
+
+            $imagePath = $this->image ? $this->image->store('profiles', 'public') : null;
+            $cvPath = $this->cv ? $this->cv->store('cv', 'public') : null;
+
+            Student::create([
+                'user_id' => $this->user_id,
+                'name' => $this->name,
+                'image_url' => $imagePath,
+                'website_url' => $this->website_url,
+                'competences' => json_encode($this->competences),
+                'description' => $this->description,
+                'cv_url' => $cvPath,
+                'linkedin_url' => $this->linkedin_url,
+            ]);
         }
 
         $this->step = 5;

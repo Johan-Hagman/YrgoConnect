@@ -53,6 +53,12 @@
             <button type="button" wire:click="nextStep">Nästa</button>
         @endif
 
+        @if($step === 2 && $role === 'student')
+
+        
+
+        @endif
+
         {{-- Step 3: Company // Student --}}
         @if($step === 3 && $role === 'company')
             <h1>Vad söker ni?</h1>

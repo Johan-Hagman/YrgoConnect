@@ -5,9 +5,10 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\User;
-use App\Models\Company;
 use App\Models\Role;
+use App\Models\Company;
 use App\Models\Student;
+use App\Models\Competence;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,35 +28,30 @@ class MultiStepRegistration extends Component
     public $class = [], $competences = [], $description, $cv, $linkedin_url, $name;
     public $event_attendance = false, $accept_terms = false;
 
-
+    public $availableCompetences = [];
 
     protected $rules = [
-        // Step 1
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8|confirmed',
         'role' => 'required|in:student,company',
-
-        // Step 2 - Company
-        'company_name' => 'required_if:role,company|string',
-        'image' => 'nullable|image|max:1024',
-        'city' => 'nullable|string',
-        'contact_name' => 'required_if:role,company|string',
-        'website_url' => 'nullable|url',
-        'class' => 'required_if:role,company|array',
-        'competences' => 'nullable|array',
-        'description' => 'nullable|string|max:240',
-        'event_attendance' => 'boolean',
-        'accept_terms' => 'accepted',
-
-        // Step 2 - Student
-        'name' => 'required_if:role,student|string|max:255',
-        'class' => 'required_if:role,student|in:Webbutvecklare,Digital Designer',
-        'website_url' => 'required_if:role,student|url',
-        'competences' => 'required_if:role,student|array',
-        'competences.*' => 'string',
-        'cv' => 'nullable|file|mimes:pdf|max:2048',
-        'linkedin_url' => 'nullable|url',
     ];
+
+    public function updatedClass()
+    {
+        if ($this->class) {
+            $classId = $this->getClassIdFromName($this->class);
+            $this->availableCompetences = Competence::where('class_id', $classId)->pluck('name')->toArray();
+        }
+    }
+
+    private function getClassIdFromName($name)
+    {
+        return match ($name) {
+            'Webbutvecklare' => 1,
+            'Digital Designer' => 2,
+            default => null,
+        };
+    }
 
     public function registerUser()
     {
@@ -97,10 +93,21 @@ class MultiStepRegistration extends Component
     public function submit()
     {
 
-        $this->validate();
-
-
         if ($this->role === 'company') {
+
+            $this->validate([
+                'company_name' => 'required|string',
+                'image' => 'nullable|image|max:2048',
+                'city' => 'nullable|string',
+                'contact_name' => 'required|string',
+                'website_url' => 'nullable|url',
+                'class' => 'required|array',
+                'competences' => 'nullable|array',
+                'description' => 'nullable|string|max:240',
+                'event_attendance' => 'boolean',
+                'accept_terms' => 'accepted',
+            ]);
+
             $imagePath = $this->image ? $this->image->store('logos', 'public') : null;
 
             Company::create([
@@ -114,8 +121,23 @@ class MultiStepRegistration extends Component
                 'competences' => json_encode($this->competences),
                 'description' => $this->description,
                 'attendance' => $this->event_attendance,
+
             ]);
-        } elseif ($this->role === 'student') {
+        }
+        if ($this->role === 'student') {
+
+            $this->validate([
+                'name' => 'required|string|max:255',
+                'image' => 'nullable|image|max:1024',
+                'website_url' => 'required|url',
+                'class' => 'required|in:Webbutvecklare,Digital Designer',
+                'competences' => 'required|array',
+                'competences.*' => 'string',
+                'description' => 'nullable|string|max:240',
+                'cv' => 'nullable|file|mimes:pdf|max:2048',
+                'linkedin_url' => 'nullable|url',
+                'accept_terms' => 'accepted',
+            ]);
 
             $imagePath = $this->image ? $this->image->store('profiles', 'public') : null;
             $cvPath = $this->cv ? $this->cv->store('cv', 'public') : null;

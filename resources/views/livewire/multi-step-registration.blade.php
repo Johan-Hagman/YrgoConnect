@@ -122,12 +122,12 @@
         
         <label class="required">Jag är intresserad av LIA inom</label>
         <span>Välj så många alternativ du vill</span>
-        @foreach($competences as $competence)
+        @foreach($availableCompetences as $competence)
             <label>
-                <input type="checkbox" wire:model="competences" value="{{ $competence->id }}"> {{ $competence->name }}
+                <input type="checkbox" wire:model="competences" value="{{ $competence }}">
+                {{ $competence }}
             </label>
         @endforeach
-        @error('competences') <span>{{ $message }}</span> @enderror
 
         <label>Här kan du skriva en hisspitch om dig själv:</label>
         <textarea wire:model="description" maxlength="240" placeholder="Här kan du skriva en hisspitch och berätta lite mer om dig själv."></textarea>
@@ -209,7 +209,7 @@
                 <p>{{ $description }}</p>
 
                 <p>Jag är:</p>
-                <p>{{ $role }}</p>
+                <p>{{ $role }}</p> 
 
                 <p>Jag studerar till:</p>
                 <p>{{ $class }}</p>
@@ -221,7 +221,7 @@
                 <p>{{ $email }}</p>
 
                 <p>För- och efternamn:</p>
-                <p>{{ $company_name }}</p>
+                <p>{{ $name }}</p>
 
                 <p>Länk till portfoliio eller github:</p>
                 <a href="{{ $website_url }}" target="_blank">{{ $website_url }}</a>
@@ -233,7 +233,7 @@
                     <p>Ditt CV:</p>
                     <p>{{ $cv->getClientOriginalName() }}</p>
                 @endif
-                
+
             @endif
 
             <button type="button" wire:click="previousStep">Tillbaka</button>

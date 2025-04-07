@@ -16,11 +16,13 @@
 
     $logoWrapperHeight = $isSmall ? 'h-36' : 'h-44';
     $logoFontSize = $isSmall ? 'text-5xl leading-[50.48px]' : 'text-8xl leading-[102px]';
-    $nameTextSize = $isSmall ? 'text-[9.9px] leading-3' : 'text-xl leading-7';
-    $titleTextSize = $isSmall ? 'text-[7.92px] leading-3' : 'text-base leading-snug';
-    $linkTextSize = $titleTextSize;
-    $descTextSize = $titleTextSize;
+
+    $nameTextSize = 'text-[9.9px] leading-3';
+    $titleTextSize = 'text-[7.92px] leading-3';
+    $linkTextSize = 'text-[7.92px] leading-3';
+    $descTextSize = 'text-[7.92px] leading-3';
 @endphp
+
 
 <div class="bg-blue rounded-lg inline-flex flex-col justify-center items-center {{ $wrapperClasses }}">
     <!-- Logo -->

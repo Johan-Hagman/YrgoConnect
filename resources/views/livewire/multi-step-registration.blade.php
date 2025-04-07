@@ -58,9 +58,27 @@
         @endif
 
         @if($step === 2 && $role === 'student')
+        <h1>Ta chansen att hitta din framtida LIA-plats!</h1>
+        <img src="{{asset('icons/Bar-Step-2.png')}}" alt="Progress bar showing step 2 out of 4">
 
+        <label class="required">För- och efternamn</label>
+        <input type="text" wire:model="name" required>
 
+        <label class="required">Utbildning</label>
+        <label>Webbutvecklare <input type="radio" wire:model="class" value="Webbutvecklare"></label>
+        <label>Digital Designer <input type="radio" wire:model="class" value="Digital Designer"></label>
+        @error('class') <span class="text-red-500">{{ $message }}</span> @enderror
 
+        <label>Bild på dig</label>
+        <input type="file" wire:model="image" accept="image/*">
+        <div wire:loading wire:target="image">Laddar upp...</div>
+        @error('image') <span>{{ $message }}</span> @enderror
+
+        <label class="required">Länk till portfolio eller github</label>
+        <input type="url" wire:model="website_url" required>
+        @error('website_url') <span class="text-red-500">{{ $message }}</span> @enderror
+    
+        <button type="button" wire:click="nextStep">Nästa</button>
         @endif
 
         {{-- Step 3: Company // Student --}}
@@ -82,7 +100,7 @@
 
             <label>Är det något mer du vill berätta om ert företag?</label>
             <textarea wire:model="description" maxlength="240" placeholder="Här kan du skriva en hisspitch eller berätta om era förmåner, sammanhållning etc."></textarea>
-            <span>{{ strlen($description) }}/240 tecken</span>
+            <span>0/240 tecken</span>
             @error('description') <span>{{ $message }}</span> @enderror
 
             <label>
@@ -96,6 +114,42 @@
 
             <button type="button" wire:click="previousStep">Tillbaka</button>
             <button type="button" wire:click="nextStep">Nästa</button>
+        @endif
+
+        @if($step === 3 && $role === 'student')
+        <h1>Ta chansen att hitta din framtida LIA-plats!</h1>
+        <img src="{{asset('icons/Bar-Step-3.png')}}" alt="Progress bar showing step 3 out of 4">
+        
+        <label class="required">Jag är intresserad av LIA inom</label>
+        <span>Välj så många alternativ du vill</span>
+        @foreach($competences as $competence)
+            <label>
+                <input type="checkbox" wire:model="competences" value="{{ $competence->id }}"> {{ $competence->name }}
+            </label>
+        @endforeach
+        @error('competences') <span>{{ $message }}</span> @enderror
+
+        <label>Här kan du skriva en hisspitch om dig själv:</label>
+        <textarea wire:model="description" maxlength="240" placeholder="Här kan du skriva en hisspitch och berätta lite mer om dig själv."></textarea>
+        <span>0/240 tecken</span>
+        @error('description') <span>{{ $message }}</span> @enderror
+
+        <label>Länk till LinkedIn-profil</label>
+        <input type="url" wire:model="linkedin_url">
+        @error('linkedin_url') <span>{{ $message }}</span> @enderror
+
+        <label class="required">Ladda upp CV</label>
+        <input type="file" wire:model="cv" accept="application/pdf">
+        <div wire:loading wire:target="cv">Laddar upp...</div>
+        @error('cv') <span>{{ $message }}</span> @enderror
+
+        <label class="required">
+            <input type="checkbox" wire:model="accept_terms" required> Jag accepterar YRGOs användarvillkor
+        </label>
+        @error('accept_terms') <span>{{ $message }}</span> @enderror
+
+        <button type="button" wire:click="previousStep">Tillbaka</button>
+        <button type="button" wire:click="nextStep">Nästa</button>
         @endif
 
         {{-- Step 4: Review --}}
@@ -128,7 +182,7 @@
                 <p>{{ $contact_name }}</p>
 
                 <p>Länk till företagets hemsida:</p>
-                <p>{{ $website_url }}</p>
+                <a href="{{ $website_url }}" target="_blank">{{ $website_url }}</a>
 
                 <p>Ort:</p>
                 <p>{{ $city }}</p>
@@ -140,6 +194,46 @@
                 <p>Vilka kompetenser söker ni?</p>
                 <p>{{ implode(', ', $competences) }}</p>
 
+            @endif
+
+            @if($role === 'student')
+
+                @if($image && method_exists($image, 'temporaryUrl'))
+                <div>
+                    <p>Preview:</p>
+                    <img src="{{ $image->temporaryUrl() }}" alt="Profile preview" class="max-h-48">
+                </div>
+                @endif  
+
+                <p>Här kan du skriva en hisspitch om dig själv:</p>
+                <p>{{ $description }}</p>
+
+                <p>Jag är:</p>
+                <p>{{ $role }}</p>
+
+                <p>Jag studerar till:</p>
+                <p>{{ $class }}</p>
+
+                <p>Jag söker LIA inom:</p>
+                <p>{{ implode(', ', $competences ?? []) }}</p>
+
+                <p>E-postadress:</p>
+                <p>{{ $email }}</p>
+
+                <p>För- och efternamn:</p>
+                <p>{{ $company_name }}</p>
+
+                <p>Länk till portfoliio eller github:</p>
+                <a href="{{ $website_url }}" target="_blank">{{ $website_url }}</a>
+
+                <p>Länk till din LinkedIn-profil:</p>
+                <a href="{{ $linkedin_url }}" target="_blank">{{ $linkedin_url }}</a>
+
+                @if ($cv)
+                    <p>Ditt CV:</p>
+                    <p>{{ $cv->getClientOriginalName() }}</p>
+                @endif
+                
             @endif
 
             <button type="button" wire:click="previousStep">Tillbaka</button>

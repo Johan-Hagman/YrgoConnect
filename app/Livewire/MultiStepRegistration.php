@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Role;
+use App\Models\Student;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,8 +24,10 @@ class MultiStepRegistration extends Component
 
     // Company-data
     public $company_name, $image, $city, $contact_name, $website_url;
-    public $class = [], $competences = [], $description;
+    public $class = [], $competences = [], $description, $cv, $linkedin_url, $name;
     public $event_attendance = false, $accept_terms = false;
+
+
 
     protected $rules = [
         // Step 1
@@ -32,7 +35,7 @@ class MultiStepRegistration extends Component
         'password' => 'required|min:8|confirmed',
         'role' => 'required|in:student,company',
 
-        // Step 2 - if company
+        // Step 2 - Company
         'company_name' => 'required_if:role,company|string',
         'image' => 'nullable|image|max:1024',
         'city' => 'nullable|string',
@@ -43,7 +46,17 @@ class MultiStepRegistration extends Component
         'description' => 'nullable|string|max:240',
         'event_attendance' => 'boolean',
         'accept_terms' => 'accepted',
+
+        // Step 2 - Student
+        'name' => 'required_if:role,student|string|max:255',
+        'class' => 'required_if:role,student|in:Webbutvecklare,Digital Designer',
+        'competences' => 'required_if:role,student|array',
+        'competences.*' => 'string',
+        'cv' => 'nullable|file|mimes:pdf|max:2048',
+        'linkedin_url' => 'nullable|url',
     ];
+
+
 
     public function registerUser()
     {

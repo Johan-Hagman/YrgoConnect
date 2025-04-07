@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,12 +26,12 @@ class MultiStepRegistration extends Component
     public $event_attendance = false, $accept_terms = false;
 
     protected $rules = [
-        // Steg 1
+        // Step 1
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8|confirmed',
         'role' => 'required|in:student,company',
 
-        // Steg 2-3 (om company)
+        // Step 2 - if company
         'company_name' => 'required_if:role,company|string',
         'image' => 'nullable|image|max:1024',
         'city' => 'nullable|string',
@@ -48,6 +49,15 @@ class MultiStepRegistration extends Component
         $this->validateOnly('email');
         $this->validateOnly('password');
         $this->validateOnly('role');
+
+        // Get the role_id based on role name
+        $roleName = $this->role === 'student' ? 'Student' : 'Företag';
+        $roleId = Role::where('name', $roleName)->value('id');
+
+        if (!$roleId) {
+            $this->addError('role', 'Invalid role selected.');
+            return;
+        }
 
         $user = User::create([
             'email' => $this->email,

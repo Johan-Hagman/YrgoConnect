@@ -46,23 +46,24 @@ class MultiStepRegistration extends Component
 
     public function registerUser()
     {
-        $this->validateOnly('email');
-        $this->validateOnly('password');
-        $this->validateOnly('role');
+        $validated = $this->validate([
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|same:password_confirmation',
+            'role' => 'required|in:student,company',
+        ]);
 
-        // Get the role_id based on role name
         $roleName = $this->role === 'student' ? 'Student' : 'Företag';
         $roleId = Role::where('name', $roleName)->value('id');
 
         if (!$roleId) {
-            $this->addError('role', 'Invalid role selected.');
+            $this->addError('role', 'Ogiltig roll vald');
             return;
         }
 
         $user = User::create([
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role' => $this->role,
+            'role_id' => $roleId,
         ]);
 
         Auth::login($user);
@@ -72,7 +73,6 @@ class MultiStepRegistration extends Component
 
     public function nextStep()
     {
-        $this->validate();
         $this->step++;
     }
 

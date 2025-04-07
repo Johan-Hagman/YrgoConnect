@@ -103,6 +103,8 @@ class MultiStepRegistration extends Component
                 'description' => $this->description,
                 'attendance' => $this->event_attendance,
             ]);
+        } elseif ($this->role === 'student') {
+            // More logic coming
         }
 
         $this->step = 5;

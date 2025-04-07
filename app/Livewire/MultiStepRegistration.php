@@ -56,8 +56,6 @@ class MultiStepRegistration extends Component
         'linkedin_url' => 'nullable|url',
     ];
 
-
-
     public function registerUser()
     {
         $validated = $this->validate([
@@ -98,13 +96,11 @@ class MultiStepRegistration extends Component
     public function submit()
     {
 
-        $this->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        $this->validate();
 
-        $imagePath = $this->image ? $this->image->store('logos', 'public') : null;
 
         if ($this->role === 'company') {
+            $imagePath = $this->image ? $this->image->store('logos', 'public') : null;
 
             Company::create([
                 'user_id' => $this->user_id,

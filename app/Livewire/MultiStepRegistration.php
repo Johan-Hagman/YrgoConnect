@@ -7,7 +7,6 @@ use Livewire\WithFileUploads;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Role;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -85,17 +84,9 @@ class MultiStepRegistration extends Component
 
     public function submit()
     {
-        Log::info('submit() kördes');
-
-        Log::info('Submitting with data: ', [
-            'image' => $this->image,
-            'role' => $this->role,
-            'email' => $this->email,
-            'company_name' => $this->company_name,
-        ]);
 
         $this->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $imagePath = $this->image ? $this->image->store('logos', 'public') : null;

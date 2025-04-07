@@ -83,11 +83,14 @@ class MultiStepRegistration extends Component
 
     public function submit()
     {
-        $this->validate();
+        $this->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
 
         $imagePath = $this->image ? $this->image->store('logos', 'public') : null;
 
         if ($this->role === 'company') {
+
             Company::create([
                 'user_id' => $this->user_id,
                 'name' => $this->company_name,

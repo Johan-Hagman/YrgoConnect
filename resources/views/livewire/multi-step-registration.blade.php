@@ -2,7 +2,7 @@
     <form wire:submit.prevent="submit" enctype="multipart/form-data">
         @csrf
 
-        {{-- Steg 1: Användare --}}
+        {{-- Step 1: User --}}
         @if($step === 1)
             <h1>Skapa din profil</h1>
 
@@ -25,7 +25,7 @@
             <button type="button" wire:click="registerUser">Nästa</button>
         @endif
 
-        {{-- Steg 2: Företagsinfo --}}
+        {{-- Step 2: Company // Student --}}
         @if($step === 2 && $role === 'company')
             <h1>Företagsinformation</h1>
 
@@ -53,7 +53,7 @@
             <button type="button" wire:click="nextStep">Nästa</button>
         @endif
 
-        {{-- Steg 3: Företag – info om LIA --}}
+        {{-- Step 3: Company // Student --}}
         @if($step === 3 && $role === 'company')
             <h1>Vad söker ni?</h1>
 
@@ -85,7 +85,7 @@
             <button type="button" wire:click="nextStep">Nästa</button>
         @endif
 
-        {{-- Steg 4: Bekräftelse --}}
+        {{-- Step 4: Review --}}
         @if($step === 4)
             <h1>Se över din information</h1>
 
@@ -104,7 +104,7 @@
             <button type="submit">Registrera</button>
         @endif
 
-        {{-- Steg 5: Klart --}}
+        {{-- Step 5: Confirmation! --}}
         @if($step === 5)
             <h1>Registreringen lyckades!</h1>
             <p>Välkommen till plattformen 🎉</p>

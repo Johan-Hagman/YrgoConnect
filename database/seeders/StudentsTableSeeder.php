@@ -17,7 +17,7 @@ class StudentsTableSeeder extends Seeder
 
         Student::create([
             'name' => 'Anna Dahlberg',
-            'image_url' => 'https://i.etsystatic.com/22616135/r/il/ac4b90/5756479891/il_1080xN.5756479891_6iui.jpg',
+            'image_url' => 'logos/default-logo.jpg',
             'website_url' => 'https://github.com/anna-dahlberg',
             'description' => 'Hej, jag heter Anna är 26 år och intresserad av Frontend-utveckling',
             'cv_url' => 'https://github.com/anna-dahlberg/AlmostOnBoard',
@@ -28,7 +28,7 @@ class StudentsTableSeeder extends Seeder
 
         Student::create([
             'name' => 'Johan Hagman',
-            'image_url' => $faker->imageUrl(),
+            'image_url' => 'logos/default-logo.jpg',
             'website_url' => $faker->url,
             'description' => $faker->paragraph,
             'cv_url' => $faker->url,

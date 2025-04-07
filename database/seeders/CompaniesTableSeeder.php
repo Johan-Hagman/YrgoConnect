@@ -14,7 +14,7 @@ class CompaniesTableSeeder extends Seeder
 
         Company::create([
             'name' => $faker->name(),
-            'image_url' => $faker->imageUrl(),
+            'image_url' => 'logos/default-logo.jpg',
             'website_url' => $faker->url,
             'description' => $faker->paragraph,
             'linkedin_url' => $faker->url,
@@ -24,7 +24,7 @@ class CompaniesTableSeeder extends Seeder
 
         Company::create([
             'name' => $faker->name(),
-            'image_url' => $faker->imageUrl(),
+            'image_url' => 'logos/default-logo.jpg',
             'website_url' => $faker->url,
             'description' => $faker->paragraph,
             'linkedin_url' => $faker->url,

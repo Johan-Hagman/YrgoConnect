@@ -140,10 +140,12 @@
                 <p>Vilka kompetenser söker ni?</p>
                 <p>{{ implode(', ', $competences) }}</p>
 
+                <pre>Nuvarande steg: {{ $step }}</pre>
+
             @endif
 
             <button type="button" wire:click="previousStep">Tillbaka</button>
-            <button type="submit" wire:click="submit">Registrera</button>
+            <button type="button" wire:click="submit">Registrera</button>
         @endif
 
         {{-- Step 5: Confirmation! --}}

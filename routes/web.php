@@ -9,6 +9,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/villkor', function () {
+    return view('terms');
+})->name('terms');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

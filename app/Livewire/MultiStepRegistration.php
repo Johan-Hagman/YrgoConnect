@@ -25,7 +25,7 @@ class MultiStepRegistration extends Component
 
     // Company-data
     public $company_name, $image, $city, $contact_name, $website_url;
-    public $class = [], $competences = [], $description, $cv, $linkedin_url, $name;
+    public $class = [], $competences = [], $description, $cv, $linkedin_url, $name, $class_id;
     public $event_attendance = false, $accept_terms = false;
 
     public $availableCompetences = [];
@@ -141,6 +141,7 @@ class MultiStepRegistration extends Component
 
             $imagePath = $this->image ? $this->image->store('profiles', 'public') : null;
             $cvPath = $this->cv ? $this->cv->store('cv', 'public') : null;
+            $classId = $this->getClassIdFromName($this->class);
 
             Student::create([
                 'user_id' => $this->user_id,
@@ -151,6 +152,7 @@ class MultiStepRegistration extends Component
                 'description' => $this->description,
                 'cv_url' => $cvPath,
                 'linkedin_url' => $this->linkedin_url,
+                'class_id' => $classId,
             ]);
         }
 

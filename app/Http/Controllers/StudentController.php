@@ -45,9 +45,42 @@ class StudentController extends Controller
         return view('students.index', compact('students'));
     }
 
-    public function showProfile()
+    public function show()
     {
         $student = auth()->user()->student;
-        return view('profile.student', compact('student'));
+
+        return view('students.show', compact('student'));
+    }
+
+
+    public function edit()
+    {
+        $student = auth()->user()->student;
+
+        return view('students.edit', compact('student'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'image_url' => 'nullable|url',
+            'website_url' => 'nullable|url',
+            'description' => 'nullable|string',
+            'cv_url' => 'nullable|url',
+            'linkedin_url' => 'nullable|url',
+        ]);
+
+        $student = auth()->user()->student;
+
+        $student->update($request->only([
+            'name',
+            'website_url',
+            'description',
+            'cv_url',
+            'linkedin_url',
+        ]));
+
+        return redirect()->route('profile.show.student')->with('success', 'Din profil har uppdaterats.');
     }
 }

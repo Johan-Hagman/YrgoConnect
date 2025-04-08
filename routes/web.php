@@ -31,8 +31,9 @@ Route::resource('students', StudentController::class);
 Route::resource('companies', CompanyController::class);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/min-profil', [StudentController::class, 'showProfile'])->name('profile.show');
-    Route::get('/min-profil/company', [CompanyController::class, 'showProfile'])->name('profile.show.company');
+    Route::get('/profile/student', [StudentController::class, 'show'])->name('profile.show.student');
+    Route::get('/profile/student/edit', [StudentController::class, 'edit'])->name('profile.edit.student');
+    Route::patch('/profile/student', [StudentController::class, 'update'])->name('profile.update.student');
 });
 
 

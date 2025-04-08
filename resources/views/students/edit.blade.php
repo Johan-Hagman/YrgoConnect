@@ -1,38 +1,56 @@
-{{-- resources/views/students/edit.blade.php --}}
 <x-layout>
-    <div class="container">
-        <h1>Ändra Profil</h1>
-
-        <form action="{{ route('profile.update.student') }}" method="POST">
+    <div>
+        <form method="POST" action="{{ route('students.update', $student) }}" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
-
-            <div class="form-group">
-                <label for="name">Namn</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $student->name) }}" required>
+            @method('PUT')
+            
+            <div class="imageContainer">
+                <img src="{{ asset('storage/' . $student->image_url ?: 'default_image.jpg') }}" alt="Bild på studenten {{ $student->name }}">
+                <input type="file" name="image" accept="image/*">
+                @error('image') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
+                       
+            <label class="required">För- och efternamn</label>
+            <input type="text" name="name" value="{{ $student->name }}" required>
+            @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
 
-            <div class="form-group">
-                <label for="website_url">Website URL</label>
-                <input type="url" id="website_url" name="website_url" class="form-control" value="{{ old('website_url', $student->website_url) }}">
+            <label class="required">Utbildning</label>
+            <label>Webbutvecklare <input type="radio" name="class" value="Webbutvecklare" {{ $student->classModel->name == 'Webbutvecklare' ? 'checked' : '' }}></label>
+            <label>Digital Designer <input type="radio" name="class" value="Digital Designer" {{ $student->classModel->name == 'Digital Designer' ? 'checked' : '' }}></label>
+            @error('class') <span class="text-red-500">{{ $message }}</span> @enderror
+
+            <div>
+                <label class="required">Länk till portfolio eller github</label>
+                <input type="url" name="website_url" value="{{ $student->website_url }}" required>
+                @error('website_url') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
+            
+            <label>Här kan du skriva en hisspitch om dig själv:</label>
+            <textarea name="description" maxlength="240" placeholder="Här kan du skriva en hisspitch och berätta lite mer om dig själv.">{{ $student->description }}</textarea>
+            <span>{{ strlen($student->description) }}/240 tecken</span>
+            @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
 
-            <div class="form-group">
-                <label for="linkedin_url">LinkedIn URL</label>
-                <input type="url" id="linkedin_url" name="linkedin_url" class="form-control" value="{{ old('linkedin_url', $student->linkedin_url) }}">
-            </div>
+            @if ($student->cv_url)
+                <p><a href="{{ asset('storage/' . $student->cv_url) }}" target="_blank">Uppladdat CV</a></p>
+            @endif
+            <input type="file" name="cv" accept="application/pdf">
+            @error('cv') <span class="text-red-500">{{ $message }}</span> @enderror
 
-            <div class="form-group">
-                <label for="cv_url">CV URL</label>
-                <input type="url" id="cv_url" name="cv_url" class="form-control" value="{{ old('cv_url', $student->cv_url) }}">
-            </div>
+            <label>Länk till LinkedIn-profil</label>
+            <input type="url" name="linkedin_url" value="{{ $student->linkedin_url }}">
+            @error('linkedin_url') <span class="text-red-500">{{ $message }}</span> @enderror
 
-            <div class="form-group">
-                <label for="description">Beskrivning</label>
-                <textarea id="description" name="description" class="form-control" rows="4">{{ old('description', $student->description) }}</textarea>
-            </div>
+            <label class="required">Kompetenser:</label>
+            {{-- @foreach($availableCompetences as $competence)
+                <label>
+                    <input type="checkbox" name="competences[]" value="{{ $competence }}" 
+                        {{ in_array($competence, json_decode($student->competences)) ? 'checked' : '' }}>
+                    {{ $competence }}
+                </label>
+            @endforeach             --}}
 
-            <button type="submit" class="btn btn-success">Spara Ändringar</button>
+            <button type="submit">Spara ändringar</button>
+            <a href="{{ route('students.show', $student) }}">Avbryt</a>
         </form>
     </div>
 </x-layout>

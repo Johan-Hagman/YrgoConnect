@@ -17,23 +17,33 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'nullable|string|max:255',
-            'image_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'website_url' => 'nullable|url',
             'description' => 'nullable|string',
-            'cv_url' => 'nullable|url',
+            'cv_url' => 'nullable|file|mimes:pdf|max:2048',
             'linkedin_url' => 'nullable|url',
             'user_id' => 'required|exists:users,id',
             'class_id' => 'required|exists:classes,id'
         ]);
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profile_images', 'public'); // Spara bilden i 'public' disk
+        }
+
+        if ($request->hasFile('cv_url')) {
+            $cvPath = $request->file('cv_url')->store('cv', 'public');
+        }
+
         $student = new Student();
         $student->name = $request->name;
         $student->user_id = $request->user()->id;
         $student->class_id = $request->class_id;
-        $student->image_url = $request->image_url;
-        $student->cv_url = $request->cv_url;
-        $student->linkedin_url = $request->linkedin_url;
+        $student->image_url = $imagePath ?? null;
+        $student->website_url = $request->website_url;
         $student->description = $request->description;
+        $student->cv_url = $cvPath ?? null;
+        $student->linkedin_url = $request->linkedin_url;
+        $student->class_id = $request->class_id;
         $student->save();
 
         return redirect()->route('students.index');
@@ -47,9 +57,11 @@ class StudentController extends Controller
 
     public function show()
     {
-        $student = auth()->user()->student;
 
-        return view('students.show', compact('student'));
+        $student = auth()->user()->student()->with('classModel')->first();
+        $role = auth()->user()->role->name;
+
+        return view('students.show', compact('student', 'role'));
     }
 
 

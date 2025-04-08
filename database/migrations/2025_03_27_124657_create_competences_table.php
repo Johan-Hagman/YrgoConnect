@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('class_id')->nullable();
             $table->foreign('class_id')->references('id')->on('classes')->nullOnDelete();
+            $table->timestamps();
         });
     }
 

@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,5 +29,11 @@ Route::middleware('auth')->group(function () {
 Route::resource('students', StudentController::class);
 
 Route::resource('companies', CompanyController::class);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/min-profil', [StudentController::class, 'showProfile'])->name('profile.show');
+    Route::get('/min-profil/company', [CompanyController::class, 'showProfile'])->name('profile.show.company');
+});
+
 
 require __DIR__ . '/auth.php';

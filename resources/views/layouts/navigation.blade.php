@@ -31,6 +31,9 @@
         >
             @auth
                 <li>
+                    <a href="{{ route('student.show') }}" class="block px-4 py-2 hover:bg-gray-100">Min profil</a>
+                </li>
+                <li>
                     <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100">Inställningar</a>
                 </li>
                 <li>

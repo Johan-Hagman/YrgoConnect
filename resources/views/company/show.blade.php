@@ -6,12 +6,22 @@
             </div>
 
             <h1>{{ $company->name }}</h1>
-            <h4>{{ $company->city }}</h4>
-            <p>Kontaktperson: {{ $company->contact_name }}</p>
             <a href="{{ $company->website_url }}" target="_blank">Länk till hemsida</a>
             <p>{{ $company->description }}</p>
 
-            <p>Deltar på mässan: {{ $company->attendance ? 'Ja' : 'Nej' }}</p>
+            <p>Ort:</p>
+            <p>{{ $company->city }}</p>
+
+            <p>Kontaktperson:</p> 
+            <p>{{ $company->contact_name }}</p>
+
+            <p>Vi söker:</p>
+
+            <p>Med dessa kompetenser:</p>
+
+            <p>Deltar på mässan:</p> 
+            <p>{{ $company->attendance ? 'Ja' : 'Nej' }}</p>
+
         </div>
 
         <a href="{{ route('company.edit') }}">Ändra Profil</a>

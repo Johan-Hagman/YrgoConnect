@@ -50,4 +50,11 @@ class CompanyController extends Controller
 
         return view('company.show', compact('company'));
     }
+
+    public function edit()
+    {
+        $company = auth()->user()->company;
+
+        return view('company.edit', compact('company'));
+    }
 }

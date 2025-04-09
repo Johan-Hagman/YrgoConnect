@@ -9,7 +9,7 @@ class CompanyController extends Controller
 {
     public function create()
     {
-        return view('companies.create');
+        ###
     }
 
     public function store(Request $request)
@@ -35,12 +35,12 @@ class CompanyController extends Controller
         $company->attendance = $request->attendance ?? false;
         $company->save();
 
-        return redirect()->route('companies.index');
+        return redirect()->route('company.index');
     }
 
     public function index()
     {
         $companies = Company::all();
-        return view('companies.index', compact('companies'));
+        return view('company.index', compact('companies'));
     }
 }

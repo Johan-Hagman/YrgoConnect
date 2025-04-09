@@ -31,7 +31,11 @@
         >
             @auth
                 <li>
-                    <a href="{{ route('student.show') }}" class="block px-4 py-2 hover:bg-gray-100">Min profil</a>
+                    @php
+                        $user = auth()->user();
+                        $profileRoute = $user->student ? route('student.show') : ($user->company ? route('company.show') : '#');
+                    @endphp
+                    <a href="{{ $profileRoute }}" class="block px-4 py-2 hover:bg-gray-100">Min profil</a>
                 </li>
                 <li>
                     <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100">Inställningar</a>
@@ -52,6 +56,7 @@
                     </li>
                 @endif
             @endauth
+            
         </ul>
     </div>
 </div>

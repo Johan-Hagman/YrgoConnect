@@ -36,5 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/student/show', [StudentController::class, 'update'])->name('student.update');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/company/show', [CompanyController::class, 'show'])->name('company.show');
+    Route::get('/company/edit', [CompanyController::class, 'edit'])->name('company.edit');
+    Route::patch('/company/show', [CompanyController::class, 'update'])->name('company.update');
+});
+
 
 require __DIR__ . '/auth.php';

@@ -1,31 +1,83 @@
 <div>
-    <form wire:submit.prevent="submit" enctype="multipart/form-data">
+    <form wire:submit.prevent="submit" enctype="multipart/form-data" class="px-4 py-6 flex flex-col items-center gap-6">
         @csrf
 
         {{-- Step 1: User --}}
         @if($step === 1)
-            <h1>Ta chansen att hitta din perfekta LIA-matchning!</h1>
-            <p>Registrera din profil för att se vem som kommer på eventet den 23 april.</p>
+            <div class="w-full max-w-[384px] p-6 bg-blue rounded-2xl flex flex-col items-center gap-10">
 
-            <img src="{{asset('icons/Bar-Step-1.png')}}" alt="Progress bar showing step 1 out of 4">
+                <div class="flex flex-col items-start gap-6 text-center">
+                    <h1 class="text-white text-3xl font-normal font-sans leading-9">
+                        Ta chansen att hitta <br/>din perfekta LIA-matchning!
+                    </h1>
+                    <p class="text-white text-xl font-normal font-sans leading-7">
+                        Registrera din profil för att se vem som kommer på eventet den 23 april.
+                    </p>
+                </div>
 
-            <label class="required">Jag är</label>
-            <label><input type="radio" wire:model="role" value="student"> Student</label>
-            <label><input type="radio" wire:model="role" value="company"> Företag</label>
-            @error('role') <span class="text-red-500">{{ $message }}</span> @enderror
 
-            <label class="required">E-postadress</label>
-            <input type="email" wire:model.lazy="email" placeholder="exempel@mail.com" required>
-            @error('email') <span class="text-red-500">{{ $message }}</span> @enderror
+                <img src="{{ asset('icons/Bar-Step-1-mobile.png') }}" alt="Progress bar showing step 1 out of 4" class="w-80">
 
-            <label class="required">Lösenord</label>
-            <input type="password" wire:model.lazy="password" placeholder="********" required>
-            @error('password') <span class="text-red-500">{{ $message }}</span> @enderror
+                <div class="w-full flex flex-col gap-6">
+                    <!-- Role selection -->
+                    <div class="flex flex-col gap-2">
+                        <div class="inline-flex items-center gap-2">
+                            <label class="text-white text-base font-extrabold font-sans">Jag är:</label>
+                            <span class="text-rose-600 text-base font-extrabold">*</span>
+                        </div>
 
-            <label>Bekräfta lösenord</label>
-            <input type="password" wire:model.lazy="password_confirmation" placeholder="********">
+                        <div class="inline-flex justify-center items-center gap-8">
+                            <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white inline-flex items-center gap-2 cursor-pointer">
+                                <input type="radio" wire:model="role" name="role" value="company" class="form-radio text-rose-600 border-white">
+                                <span class="text-white text-base font-medium">Företag</span>
+                            </label>
+                        
+                            <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white inline-flex items-center gap-2 cursor-pointer">
+                                <input type="radio" wire:model="role" name="role" value="student" class="form-radio text-rose-600 border-white">
+                                <span class="text-white text-base font-medium">Student</span>
+                            </label>
+                        </div>
+                        
+                        @error('role') <span class="text-sm text-red">{{ $message }}</span> @enderror
+                    </div>
 
-            <button type="button" wire:click="registerUser">Nästa</button>
+                    <!-- Email input -->
+                    <div class="flex flex-col gap-2">
+                        <div class="inline-flex items-center gap-2">
+                            <label class="text-white text-base font-extrabold font-sans">E-postadress</label>
+                            <span class="text-rose-600 text-base font-extrabold">*</span>
+                        </div>
+                        <input type="email" wire:model.lazy="email" placeholder="exempel@mail.com" required
+                               class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium">
+                        @error('email') <span class="text-sm text-red">{{ $message }}</span> @enderror
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="flex flex-col gap-2">
+                        <div class="inline-flex items-center gap-2">
+                            <label class="text-white text-base font-extrabold font-sans">Lösenord</label>
+                            <span class="text-rose-600 text-base font-extrabold">*</span>
+                        </div>
+                        <input type="password" wire:model.lazy="password" placeholder="********" required
+                               class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium">
+                        @error('password') <span class="text-sm text-red">{{ $message }}</span> @enderror
+                    </div>
+
+                    <!-- Confirm Password input -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-white text-base font-extrabold font-sans">Bekräfta lösenord</label>
+                        <input type="password" wire:model.lazy="password_confirmation" placeholder="********"
+                               class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium">
+                    </div>
+
+                    <!-- Next button -->
+                    <button type="button" wire:click="registerUser" class="px-4 py-2 rounded-[40px] outline outline-1 outline-white inline-flex items-center gap-2">
+                        <span class="text-white text-base font-medium">Nästa</span>
+                    </button>
+                    
+
+                     
+
         @endif
 
         {{-- Step 2: Company // Student --}}

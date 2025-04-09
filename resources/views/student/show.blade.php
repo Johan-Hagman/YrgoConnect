@@ -33,6 +33,6 @@
                 <p>Inga kompetenser listade</p>
             @endif
         </div>
-        <a href="{{ route('profile.edit.student') }}">Ändra profil</a>
+        <a href="{{ route('student.edit') }}">Ändra profil</a>
     </div>
 </x-layout>

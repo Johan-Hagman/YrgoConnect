@@ -1,8 +1,8 @@
 <x-layout>
     <div>
-        <form method="POST" action="{{ route('students.update', $student) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('student.update', $student) }}" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            @method('PATCH')
             
             <div class="imageContainer">
                 <img src="{{ asset('storage/' . $student->image_url ?: 'default_image.jpg') }}" alt="Bild på studenten {{ $student->name }}">
@@ -41,16 +41,16 @@
             @error('linkedin_url') <span class="text-red-500">{{ $message }}</span> @enderror
 
             <label class="required">Kompetenser:</label>
-            {{-- @foreach($availableCompetences as $competence)
+            @foreach($availableCompetences as $competence)
                 <label>
                     <input type="checkbox" name="competences[]" value="{{ $competence }}" 
                         {{ in_array($competence, json_decode($student->competences)) ? 'checked' : '' }}>
                     {{ $competence }}
                 </label>
-            @endforeach             --}}
+            @endforeach            
 
             <button type="submit">Spara ändringar</button>
-            <a href="{{ route('students.show', $student) }}">Avbryt</a>
+            <a href="{{ route('student.show') }}">Avbryt</a>
         </form>
     </div>
 </x-layout>

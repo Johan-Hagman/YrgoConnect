@@ -43,4 +43,11 @@ class CompanyController extends Controller
         $companies = Company::all();
         return view('company.index', compact('companies'));
     }
+
+    public function show()
+    {
+        $company = auth()->user()->company;
+
+        return view('company.show', compact('company'));
+    }
 }

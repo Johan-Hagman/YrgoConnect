@@ -16,7 +16,7 @@ class CompanyController extends Controller
     {
         $request->validate([
             'name' => 'nullable|string|max:255',
-            'image_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'city' => 'nullable|string',
             'contact_name' => 'nullable|string',
             'website_url' => 'nullable|url',
@@ -24,10 +24,14 @@ class CompanyController extends Controller
             'attendance' => 'nullable|boolean',
         ]);
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('logo_images', 'public');
+        }
+
         $company = new Company();
         $company->name = $request->name;
         $company->user_id = $request->user()->id;
-        $company->image_url = $request->image_url;
+        $company->image_url = $imagePath ?? null;
         $company->city = $request->city;
         $company->contact_name = $request->contact_name;
         $company->website_url = $request->website_url;
@@ -56,5 +60,36 @@ class CompanyController extends Controller
         $company = auth()->user()->company;
 
         return view('company.edit', compact('company'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'city' => 'nullable|string',
+            'contact_name' => 'nullable|string',
+            'website_url' => 'nullable|url',
+            'description' => 'nullable|string',
+            'attendance' => 'nullable|boolean',
+        ]);
+
+        $company = auth()->user()->company;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('company_images', 'public');
+            $company->image_url = $imagePath;
+        }
+
+        $company->update($request->only([
+            'name',
+            'city',
+            'contact_name',
+            'website_url',
+            'description',
+            'attendance',
+        ]));
+
+        return redirect()->route('company.show')->with('success', 'Profilen har uppdaterats.');
     }
 }

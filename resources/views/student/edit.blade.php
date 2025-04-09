@@ -41,13 +41,13 @@
             @error('linkedin_url') <span class="text-red-500">{{ $message }}</span> @enderror
 
             <label class="required">Kompetenser:</label>
-            @foreach($availableCompetences as $competence)
+            {{-- @foreach($availableCompetences as $competence)
                 <label>
                     <input type="checkbox" name="competences[]" value="{{ $competence }}" 
                         {{ in_array($competence, json_decode($student->competences)) ? 'checked' : '' }}>
                     {{ $competence }}
                 </label>
-            @endforeach            
+            @endforeach             --}}
 
             <button type="submit">Spara ändringar</button>
             <a href="{{ route('student.show') }}">Avbryt</a>

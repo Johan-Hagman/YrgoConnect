@@ -143,17 +143,21 @@ class MultiStepRegistration extends Component
             $cvPath = $this->cv ? $this->cv->store('cv', 'public') : null;
             $classId = $this->getClassIdFromName($this->class);
 
-            Student::create([
+            $student = Student::create([
                 'user_id' => $this->user_id,
                 'name' => $this->name,
                 'image_url' => $imagePath,
                 'website_url' => $this->website_url,
-                'competences' => json_encode($this->competences),
                 'description' => $this->description,
                 'cv_url' => $cvPath,
                 'linkedin_url' => $this->linkedin_url,
                 'class_id' => $classId,
             ]);
+
+            if (!empty($this->competences)) {
+                $competenceIds = Competence::whereIn('name', $this->competences)->pluck('id');
+                $student->competences()->sync($competenceIds);
+            }
         }
 
         $this->step = 5;

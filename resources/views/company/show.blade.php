@@ -17,7 +17,17 @@
 
             <p>Vi söker:</p>
 
+
             <p>Med dessa kompetenser:</p>
+            @if($company->competences->count() > 0)
+                <ul>
+                    @foreach($company->competences as $competence)
+                        <li>{{ $competence->name }}</li>
+                    @endforeach
+                </ul>
+            @else
+                <p>Inga kompetenser specificerade.</p>
+            @endif
 
             <p>Deltar på mässan:</p> 
             <p>{{ $company->attendance ? 'Ja' : 'Nej' }}</p>

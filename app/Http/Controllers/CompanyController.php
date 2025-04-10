@@ -52,6 +52,8 @@ class CompanyController extends Controller
     {
         $company = auth()->user()->company;
 
+        $company = auth()->user()->company()->with('competences')->first();
+
         return view('company.show', compact('company'));
     }
 

@@ -110,19 +110,22 @@ class MultiStepRegistration extends Component
 
             $imagePath = $this->image ? $this->image->store('logos', 'public') : null;
 
-            Company::create([
+            $company = Company::create([
                 'user_id' => $this->user_id,
                 'name' => $this->company_name,
                 'image_url' => $imagePath,
                 'city' => $this->city,
                 'contact_name' => $this->contact_name,
                 'website_url' => $this->website_url,
-                'class' => json_encode($this->class),
-                'competences' => json_encode($this->competences),
                 'description' => $this->description,
                 'attendance' => $this->event_attendance,
 
             ]);
+
+            if (!empty($this->competences)) {
+                $competenceIds = Competence::whereIn('name', $this->competences)->pluck('id');
+                $company->competences()->sync($competenceIds);
+            };
         }
         if ($this->role === 'student') {
 

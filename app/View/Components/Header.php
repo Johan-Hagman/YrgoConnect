@@ -24,3 +24,5 @@ class Header extends Component
         return view('components.header');
     }
 }
+ 
+// Can be removed???

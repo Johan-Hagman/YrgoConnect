@@ -5,7 +5,9 @@
             @method('PATCH')
             
             <div class="imageContainer">
-                <img src="{{ asset('storage/' . $student->image_url ?: 'default_image.jpg') }}" alt="Bild på studenten {{ $student->name }}">
+                @if ($student->image_url)
+                    <img src="{{ asset('storage/' . $student->image_url) }}" alt="Bild på studenten {{ $student->name }}">
+                @endif
                 <input type="file" name="image" accept="image/*">
                 @error('image') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>

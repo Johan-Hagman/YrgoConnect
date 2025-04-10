@@ -131,7 +131,7 @@ class MultiStepRegistration extends Component
                 'image' => 'nullable|image|max:1024',
                 'website_url' => 'required|url',
                 'class' => 'required|in:Webbutvecklare,Digital Designer',
-                'competences' => 'required|array',
+                'competences' => 'nullable|array',
                 'competences.*' => 'string',
                 'description' => 'nullable|string|max:240',
                 'cv' => 'nullable|file|mimes:pdf|max:2048',

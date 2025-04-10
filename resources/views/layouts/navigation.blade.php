@@ -57,14 +57,6 @@
                     <li>
                         <a href="{{ route('login') }}" class="block px-4 py-2 hover:bg-grey-10">Logga in</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}" class="block px-4 py-2 hover:bg-grey-10">Registrera</a>
-                        </li>
-                    @endif
-                @endauth
-            </ul>
-        </div>
     </div>
 </header>
 

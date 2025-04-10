@@ -222,7 +222,11 @@
                 <p>{{ $description }}</p>
 
                 <p>Jag är:</p>
-                <p>{{ $role }}</p>
+                @if($role === 'company')
+                <p>Företag</p>
+                @else
+                <p>Student</p>
+                @endif
 
                 <p>E-postadress:</p>
                 <p>{{ $email }}</p>

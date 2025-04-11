@@ -11,10 +11,13 @@
                 <input type="file" name="image" accept="image/*">
                 @error('image') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
-                       
-            <label class="required">För- och efternamn</label>
-            <input type="text" name="name" value="{{ $student->name }}" required>
-            @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+            
+            <div>
+
+                <label class="required">För- och efternamn</label>
+                <input type="text" name="name" value="{{ $student->name }}" required>
+                @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+            </div>
 
             <label class="required">Utbildning</label>
             <label>Webbutvecklare <input type="radio" name="class" value="Webbutvecklare" {{ $student->classModel->name == 'Webbutvecklare' ? 'checked' : '' }}></label>

@@ -41,11 +41,13 @@
             <span class="text-white text-button font-medium font-sans leading-none">
                 Ja, jag vill delta!
             </span>
-            <img src="{{ asset('icons/Group.svg') }}" alt="Pil" class="w-6 h-6" />
+            <img src="{{ asset('icons/Arrow-Down.svg') }}" alt="Pil" class="w-6 h-6" />
         </div>
 
     </div>
 
 </section>
+
+
 
   

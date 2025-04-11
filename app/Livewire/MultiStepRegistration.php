@@ -25,7 +25,7 @@ class MultiStepRegistration extends Component
 
     // Company-data
     public $company_name, $image, $city, $contact_name, $website_url;
-    public $class = [], $competences = [], $description, $cv, $linkedin_url, $name;
+    public $class = [], $competences = [], $description = "", $cv, $linkedin_url, $name;
     public $event_attendance = false, $accept_terms = false;
 
     public $availableCompetences = [];

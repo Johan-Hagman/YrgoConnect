@@ -58,7 +58,7 @@
                     <button type="submit" class="p-4 rounded-[40px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
                         <span class="text-white text-base font-medium font-sans leading-none">Logga in</span>
                         <div class="w-0 h-6 relative origin-top-left -rotate-90 overflow-hidden">
-                            <img src="{{ asset('icons/Group.svg') }}" alt="Pil" class="w-6 h-6" />
+                            <img src="{{ asset('icons/Arrow-Left.svg') }}" alt="Pil" class="w-6 h-6" />
                         </div>
                     </button>
                 </div>

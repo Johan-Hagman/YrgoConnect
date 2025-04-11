@@ -1,18 +1,18 @@
 <x-public-layout>
-    <section class="w-full px-4 py-10 flex flex-col items-center">
-        <div class="w-full max-w-[370px] p-6 bg-blue rounded-2xl flex flex-col justify-start items-center gap-10">
+    <section class="w-full px-4 py-10 flex flex-col items-center lg:p-20">
+        <div class="w-full max-w-[370px] p-6 bg-blue rounded-2xl flex flex-col justify-start items-center gap-10 lg:max-w-[1512px] lg:px-60 lg:py-20 lg:gap-20">
 
             <!-- Title -->
-            <h1 class="w-full text-white text-3xl font-normal font-sans leading-9">
+            <h1 class="w-full text-white text-3xl font-normal font-sans leading-9 lg:max-w-[900px] lg:text-6xl lg:leading-[72px]">
                 Logga in
             </h1>
 
             <!-- Form -->
-            <form method="POST" action="{{ route('login') }}" class="w-full flex flex-col gap-6">
+            <form method="POST" action="{{ route('login') }}" class="w-full flex flex-col gap-6 lg:max-w-[872px] lg:gap-10">
                 @csrf
 
                 <!-- Email -->
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 lg:gap-2">
                     <div class="flex items-center gap-1">
                         <label for="email" class="text-white text-base font-extrabold font-sans leading-snug">E-postadress</label>
                         <span class="text-rose-600 text-base font-extrabold">*</span>

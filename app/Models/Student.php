@@ -17,11 +17,12 @@ class Student extends Model
         'description',
         'cv_url',
         'linkedin_url',
+        'class_id'
     ];
 
     public function classModel()
     {
-        return $this->belongsTo(YrgoClass::class);
+        return $this->belongsTo(YrgoClass::class, 'class_id');
     }
 
     public function competences()

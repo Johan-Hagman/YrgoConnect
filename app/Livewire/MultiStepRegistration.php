@@ -25,7 +25,7 @@ class MultiStepRegistration extends Component
 
     // Company-data
     public $company_name, $image, $city, $contact_name, $website_url;
-    public $class = [], $competences = [], $description = "", $cv, $linkedin_url, $name;
+    public $class = [], $competences = [], $description = "", $cv, $linkedin_url, $name, $class_id;
     public $event_attendance = false, $accept_terms = false;
 
     public $availableCompetences = [];
@@ -110,19 +110,22 @@ class MultiStepRegistration extends Component
 
             $imagePath = $this->image ? $this->image->store('logos', 'public') : null;
 
-            Company::create([
+            $company = Company::create([
                 'user_id' => $this->user_id,
                 'name' => $this->company_name,
                 'image_url' => $imagePath,
                 'city' => $this->city,
                 'contact_name' => $this->contact_name,
                 'website_url' => $this->website_url,
-                'class' => json_encode($this->class),
-                'competences' => json_encode($this->competences),
                 'description' => $this->description,
                 'attendance' => $this->event_attendance,
 
             ]);
+
+            if (!empty($this->competences)) {
+                $competenceIds = Competence::whereIn('name', $this->competences)->pluck('id');
+                $company->competences()->sync($competenceIds);
+            };
         }
         if ($this->role === 'student') {
 
@@ -131,7 +134,7 @@ class MultiStepRegistration extends Component
                 'image' => 'nullable|image|max:1024',
                 'website_url' => 'required|url',
                 'class' => 'required|in:Webbutvecklare,Digital Designer',
-                'competences' => 'required|array',
+                'competences' => 'nullable|array',
                 'competences.*' => 'string',
                 'description' => 'nullable|string|max:240',
                 'cv' => 'nullable|file|mimes:pdf|max:2048',
@@ -141,17 +144,23 @@ class MultiStepRegistration extends Component
 
             $imagePath = $this->image ? $this->image->store('profiles', 'public') : null;
             $cvPath = $this->cv ? $this->cv->store('cv', 'public') : null;
+            $classId = $this->getClassIdFromName($this->class);
 
-            Student::create([
+            $student = Student::create([
                 'user_id' => $this->user_id,
                 'name' => $this->name,
                 'image_url' => $imagePath,
                 'website_url' => $this->website_url,
-                'competences' => json_encode($this->competences),
                 'description' => $this->description,
                 'cv_url' => $cvPath,
                 'linkedin_url' => $this->linkedin_url,
+                'class_id' => $classId,
             ]);
+
+            if (!empty($this->competences)) {
+                $competenceIds = Competence::whereIn('name', $this->competences)->pluck('id');
+                $student->competences()->sync($competenceIds);
+            }
         }
 
         $this->step = 5;

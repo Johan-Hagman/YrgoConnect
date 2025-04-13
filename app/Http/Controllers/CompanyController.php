@@ -103,6 +103,17 @@ class CompanyController extends Controller
             'attendance',
         ]));
 
+        $company->attendance = $request->has('attendance');
+
+        $company->save();
+
+        if ($request->has('competences')) {
+            $competenceIds = \App\Models\Competence::whereIn('name', $request->competences)->pluck('id');
+            $company->competences()->sync($competenceIds);
+        } else {
+            $company->competences()->detach();
+        }
+
         return redirect()->route('company.show')->with('success', 'Profilen har uppdaterats.');
     }
 }

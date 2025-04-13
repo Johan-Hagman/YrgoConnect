@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('company_class_junction', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('class_id');
+            $table->foreign('company_id')->references('id')->on('companies')->cascadeOnDelete();
+            $table->foreign('class_id')->references('id')->on('classes')->cascadeOnDelete();
         });
     }
 

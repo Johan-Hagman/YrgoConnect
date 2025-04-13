@@ -35,4 +35,9 @@ class Company extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function classes()
+    {
+        return $this->belongsToMany(YrgoClass::class, 'company_class_junction');
+    }
 }

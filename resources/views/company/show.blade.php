@@ -16,6 +16,11 @@
             <p>{{ $company->contact_name }}</p>
 
             <p>Vi söker:</p>
+            @if($company->classes->count() > 0)
+                @foreach($company->classes as $class)
+                    <span>{{ $class->name }}</span>
+                @endforeach
+            @endif
 
 
             <p>Med dessa kompetenser:</p>

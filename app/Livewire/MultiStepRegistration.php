@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\YrgoClass;
 use App\Models\Company;
 use App\Models\Student;
 use App\Models\Competence;
@@ -25,7 +26,7 @@ class MultiStepRegistration extends Component
 
     // Company-data
     public $company_name, $image, $city, $contact_name, $website_url;
-    public $class = [], $competences = [], $description = "", $cv, $linkedin_url, $name, $class_id;
+    public $class = [], $competences = [], $description, $cv, $linkedin_url, $name, $class_id;
     public $event_attendance = false, $accept_terms = false;
 
     public $availableCompetences = [];
@@ -125,6 +126,7 @@ class MultiStepRegistration extends Component
             if (!empty($this->class)) {
                 $classIds = YrgoClass::whereIn('name', $this->class)->pluck('id');
                 $company->classes()->sync($classIds);
+            }
 
             if (!empty($this->competences)) {
                 $competenceIds = Competence::whereIn('name', $this->competences)->pluck('id');

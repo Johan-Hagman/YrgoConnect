@@ -71,6 +71,40 @@
                 </div>
             </div>
 
+            <div>
+                <label>Med dessa kompetenser:</label>
+                @php
+                    $allCompetences = ['Backend', 'Frontend', 'Fullstack', 'Motion Design', 'UX/UI', '3D', 'Webflow/Framer', 'Branding', 'Content Creation'];
+                    $selectedCompetences = $company->competences->pluck('name')->toArray();
+                @endphp
+                
+                @foreach($allCompetences as $competence)
+                    <div>
+                        <label>
+                            <input type="checkbox" name="competences[]" value="{{ $competence }}" 
+                                {{ in_array($competence, $selectedCompetences) ? 'checked' : '' }}>
+                            {{ $competence }}
+                        </label>
+                    </div>
+                @endforeach
+                @error('competences')
+                    <span>{{ $message }}</span>
+                @enderror
+            </div>
+            
+            <div>
+                <label for="attendance">Deltar på mässan:</label>
+                <div>
+                    <label>
+                        <input type="checkbox" id="attendance" name="attendance" value="1" 
+                            {{ $company->attendance ? 'checked' : '' }}>
+                        Ja
+                    </label>
+                </div>
+                @error('attendance')
+                    <span>{{ $message }}</span>
+                @enderror
+            </div>
             
             <div>
                 <button type="submit">Spara ändringar</button>

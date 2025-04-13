@@ -61,7 +61,11 @@ class CompanyController extends Controller
     {
         $company = auth()->user()->company;
 
-        return view('company.edit', compact('company'));
+        $company->load('classes');
+
+        $selectedClasses = $company->classes->pluck('name')->toArray();
+
+        return view('company.edit', compact('company', 'selectedClasses'));
     }
 
     public function update(Request $request)
@@ -81,6 +85,13 @@ class CompanyController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('company_images', 'public');
             $company->image_url = $imagePath;
+        }
+
+        if ($request->has('classes')) {
+            $classIds = \App\Models\YrgoClass::whereIn('name', $request->classes)->pluck('id');
+            $company->classes()->sync($classIds);
+        } else {
+            $company->classes()->detach();
         }
 
         $company->update($request->only([

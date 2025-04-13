@@ -38,6 +38,6 @@ class Company extends Model
 
     public function classes()
     {
-        return $this->belongsToMany(YrgoClass::class, 'company_class_junction');
+        return $this->belongsToMany(YrgoClass::class, 'company_class_junction', 'company_id', 'class_id');
     }
 }

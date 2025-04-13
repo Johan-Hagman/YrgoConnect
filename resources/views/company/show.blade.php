@@ -17,9 +17,11 @@
 
             <p>Vi söker:</p>
             @if($company->classes->count() > 0)
+            <ul>
                 @foreach($company->classes as $class)
-                    <span>{{ $class->name }}</span>
+                    <li>{{ $class->name }}</li>
                 @endforeach
+            </ul>
             @endif
 
 

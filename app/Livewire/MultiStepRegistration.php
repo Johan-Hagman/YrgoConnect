@@ -122,6 +122,10 @@ class MultiStepRegistration extends Component
 
             ]);
 
+            if (!empty($this->class)) {
+                $classIds = YrgoClass::whereIn('name', $this->class)->pluck('id');
+                $company->classes()->sync($classIds);
+
             if (!empty($this->competences)) {
                 $competenceIds = Competence::whereIn('name', $this->competences)->pluck('id');
                 $company->competences()->sync($competenceIds);

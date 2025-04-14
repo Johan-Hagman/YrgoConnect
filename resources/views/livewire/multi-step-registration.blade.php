@@ -169,14 +169,14 @@
             @error('website_url') <span class="text-sm text-red">{{ $message }}</span> @enderror
     
             <!-- Navigeringsknappar -->
-            <div class="w-full flex justify-between items-end">
-    
+            <div class="w-full flex justify-end items-end">
                 <button type="button" wire:click="nextStep"
-                        class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">
+                    class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">
                     <span class="text-white text-base font-medium font-sans leading-none">Nästa</span>
-                    <img src="{{ asset('icons/Arrow-Right.svg') }}" alt="Nästa pil" class="w-6 h-6 ">
+                    <img src="{{ asset('icons/Arrow-Right.svg') }}" alt="Nästa pil" class="w-6 h-6">
                 </button>
             </div>
+            
     
         </div>
     @endif
@@ -252,10 +252,9 @@
         @error('website_url') <span class="text-sm text-red">{{ $message }}</span> @enderror
 
         <!-- Navigeringsknappar -->
-        <div class="w-full flex justify-between items-end">
-
+        <div class="w-full flex justify-end items-end">
             <button type="button" wire:click="nextStep"
-                    class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">
+                class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">
                 <span class="text-white text-base font-medium font-sans leading-none">Nästa</span>
                 <img src="{{ asset('icons/Arrow-Right.svg') }}" alt="Nästa pil" class="w-6 h-6">
             </button>
@@ -263,7 +262,6 @@
 
     </div>
 @endif
-
 
         {{-- Step 3: Company // Student --}}
         @if($step === 3 && $role === 'company')
@@ -297,11 +295,11 @@
             <div class="flex flex-wrap gap-2 mb-4">
                 <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white inline-flex items-center gap-2 cursor-pointer">
                     <span class="text-white text-base font-medium">Webbutvecklare</span>
-                    <input type="checkbox" wire:model="class" value="Webbutvecklare" class="form-checkbox text-rose-600 border-white">
+                    <input type="checkbox" wire:model="class" value="Webbutvecklare" class="form-checkbox text-red border-white">
                 </label>
                 <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white inline-flex items-center gap-2 cursor-pointer">
                     <span class="text-white text-base font-medium">Digital Designer</span>
-                    <input type="checkbox" wire:model="class" value="Digital Designer" class="form-checkbox text-rose-600 border-white">
+                    <input type="checkbox" wire:model="class" value="Digital Designer" class="form-checkbox text-red border-white">
                 </label>
             </div>
             @error('class') <span class="text-sm text-red">{{ $message }}</span> @enderror
@@ -316,7 +314,7 @@
                 @foreach(['Backend', 'Frontend', 'Fullstack', 'Motion Design', 'UX/UI', '3D', 'Webflow/Framer', 'Branding', 'Content Creation'] as $competence)
                     <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white inline-flex items-center gap-2 cursor-pointer">
                         <span class="text-white text-base font-medium">{{ $competence }}</span>
-                        <input type="checkbox" wire:model="competences" value="{{ $competence }}" class="form-checkbox text-rose-600 border-white">
+                        <input type="checkbox" wire:model="competences" value="{{ $competence }}" class="form-checkbox text-red border-white">
                     </label>
                 @endforeach
             </div>
@@ -457,7 +455,7 @@
             <input type="file" wire:model="cv" accept="application/pdf" class="mb-2">
             <div wire:loading wire:target="cv" class="text-white text-sm italic mb-2">Laddar upp...</div>
             @error('cv') <span class="text-sm text-red">{{ $message }}</span> @enderror
-        >
+        
             <label class="text-white text-base font-extrabold font-sans leading-snug mb-6 inline-flex items-center gap-2">
                 <input type="checkbox" wire:model="accept_terms" required
                        class="form-checkbox text-red border-white"> Jag accepterar YRGOs användarvillkor <span class="text-rose-600">*</span>
@@ -509,12 +507,14 @@
             </div>
 
             @if($role === 'company')
-                @if($image && method_exists($image, 'temporaryUrl'))
-                    <div class="w-44 h-48 p-2 bg-white rounded-lg flex flex-col justify-center items-center gap-2">
-                        <img src="{{ $image->temporaryUrl() }}" alt="Logo preview" class="max-h-40 object-contain" />
-                    </div>
-                @endif
-    
+            @if($image && method_exists($image, 'temporaryUrl'))
+            <div class="self-stretch h-40 bg-white rounded-2xl overflow-hidden lg:w-[470px] lg:h-56 lg:rounded-2xl">
+                <img src="{{ $image->temporaryUrl() }}" 
+                     alt="Logo preview" 
+                     class="w-full h-full object-cover" />
+            </div>
+        @endif
+        
                 <div class="w-full max-w-[892px] flex flex-col justify-start items-start gap-6">
                     <div>
                         <p class="text-white text-base font-extrabold leading-tight mb-1">Är det något mer du vill berätta om ert företag?</p>
@@ -642,7 +642,7 @@
       {{-- Step 5: Confirmation! --}}
       @if($step === 5)
       <div class="flex flex-col justify-start items-center gap-2.5">
-        <div class="w-full bg-rose-600 rounded-2xl flex flex-col justify-start items-center gap-10 px-4 py-6
+        <div class="w-full bg-red rounded-2xl flex flex-col justify-start items-center gap-10 px-4 py-6
                     lg:px-[240px] lg:py-20">
       
               

@@ -5,13 +5,29 @@
             @method('PATCH')
 
             {{-- LOGOTYP --}}
-            <div class="w-full h-40 bg-white rounded-2xl overflow-hidden lg:w-[470px] lg:h-56">
-                @if ($company->image_url)
-                    <img src="{{ asset('storage/' . $company->image_url) }}" alt="Bild på {{ $company->name }}s logotyp" class="w-full h-full object-cover" />
-                @endif
-            </div>
-            <input type="file" name="image" accept="image/*" class="text-white">
-            @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+<div class="w-full h-40 bg-white rounded-2xl overflow-hidden relative group cursor-pointer lg:w-[470px] lg:h-56">
+    @if ($company->image_url)
+        <label for="image" class="block w-full h-full">
+            <img src="{{ asset('storage/' . $company->image_url) }}"
+                 alt="Bild på {{ $company->name }}s logotyp"
+                 class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80" />
+            <span class="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                Klicka för att ändra bild
+            </span>
+        </label>
+    @else
+        <label for="image" class="w-full h-full flex items-center justify-center text-sm text-gray-500">
+            Välj en bild
+        </label>
+    @endif
+
+    <input type="file" name="image" id="image" accept="image/*" class="hidden">
+</div>
+
+@error('image')
+    <span class="text-red-500 text-sm">{{ $message }}</span>
+@enderror
+
 
             {{-- FORMULÄRFÄLT --}}
             <div class="w-full flex flex-col justify-start items-start gap-4 text-white lg:self-stretch">
@@ -25,10 +41,22 @@
                 <input type="url" id="website_url" name="website_url" value="{{ old('website_url', $company->website_url) }}" class="w-full h-11 px-5 py-3 bg-white rounded-lg text-black font-medium leading-none underline" />
 
                 {{-- Beskrivning --}}
-                <label class="font-extrabold leading-snug mt-4" for="description">Är det något mer du vill berätta om ert företag?</label>
-                <textarea id="description" name="description" maxlength="240" class="w-full h-60 p-4 bg-white rounded-lg text-black font-normal leading-snug">{{ old('description', $company->description) }}</textarea>
-                <p class="text-neutral-300 text-right w-full text-sm">0/240 tecken</p>
-
+                <div x-data="{ count: {{ strlen(old('description', $company->description)) }} }" class="w-full">
+                    <label class="font-extrabold leading-snug mt-4" for="description">
+                        Är det något mer du vill berätta om ert företag?
+                    </label>
+                
+                    <textarea
+                        id="description"
+                        name="description"
+                        maxlength="240"
+                        x-on:input="count = $event.target.value.length"
+                        class="w-full h-60 p-4 bg-white rounded-lg text-black font-normal leading-snug"
+                    >{{ old('description', $company->description) }}</textarea>
+                
+                    <p class="text-neutral-300 text-right w-full text-sm" x-text="`${count}/240 tecken`"></p>
+                </div>
+                
                 {{-- Ort --}}
                 <label class="font-extrabold leading-snug mt-4" for="city">Ort:</label>
                 <input type="text" id="city" name="city" value="{{ old('city', $company->city) }}" class="w-full h-11 px-5 py-3 bg-white rounded-lg text-black font-medium leading-none" />
@@ -43,7 +71,7 @@
                     @foreach(['Webbutvecklare', 'Digital Designer'] as $class)
                         <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white flex items-center gap-2">
                             <span>{{ $class }}</span>
-                            <input type="checkbox" name="classes[]" value="{{ $class }}" {{ in_array($class, $selectedClasses ?? []) ? 'checked' : '' }} class="form-checkbox">
+                            <input type="checkbox" name="classes[]" value="{{ $class }}" {{ in_array($class, $selectedClasses ?? []) ? 'checked' : '' }} class="form-checkbox text-red">
                         </label>
                     @endforeach
                 </div>
@@ -63,7 +91,7 @@
                 <span class="text-base font-medium leading-none">{{ $competence }}</span>
                 <input type="checkbox" name="competences[]" value="{{ $competence }}"
                     {{ in_array($competence, $selectedCompetences) ? 'checked' : '' }}
-                    class="w-5 h-5 rounded border-white bg-white text-sky-950 focus:ring-0 focus:ring-offset-0">
+                    class="w-5 h-5 rounded border-white bg-white text-red focus:ring-0 focus:ring-offset-0">
             </label>
         @endforeach
     </div>
@@ -74,7 +102,7 @@
             
                 {{-- Mässa --}}
                 <label class="font-extrabold leading-snug mt-4" for="attendance">Deltar på mässan:</label>
-                <input type="checkbox" id="attendance" name="attendance" value="1" {{ $company->attendance ? 'checked' : '' }} class="form-checkbox">
+                <input type="checkbox" id="attendance" name="attendance" value="1" {{ $company->attendance ? 'checked' : '' }} class="form-checkbox text-red">
 
             </div>
 

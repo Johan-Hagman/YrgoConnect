@@ -170,11 +170,6 @@
     
             <!-- Navigeringsknappar -->
             <div class="w-full flex justify-between items-end">
-                <button type="button" wire:click="previousStep"
-                        class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">
-                    <img src="{{ asset('icons/Arrow-Left.svg') }}" alt="Tillbaka" class="w-6 h-6 ">
-                    <span class="text-white text-base font-medium font-sans leading-none">Tillbaka</span>
-                </button>
     
                 <button type="button" wire:click="nextStep"
                         class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">
@@ -258,11 +253,6 @@
 
         <!-- Navigeringsknappar -->
         <div class="w-full flex justify-between items-end">
-            <button type="button" wire:click="previousStep"
-                    class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">
-                <img src="{{ asset('icons/Arrow-Left.svg') }}" alt="Tillbaka" class="w-6 h-6">
-                <span class="text-white text-base font-medium font-sans leading-none">Tillbaka</span>
-            </button>
 
             <button type="button" wire:click="nextStep"
                     class="p-4 rounded-[40px] outline outline-1 outline-white flex justify-center items-center gap-2.5">

@@ -1,4 +1,4 @@
-<x-layout>
+<x-public-layout>
     <div>
         <form method="POST" action="{{ route('company.update', $company) }}" enctype="multipart/form-data">
             @csrf
@@ -78,4 +78,4 @@
             </div>
         </form>
     </div>
-</x-layout>
+</x-public-layout>

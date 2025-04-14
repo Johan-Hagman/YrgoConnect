@@ -1,4 +1,4 @@
-<x-layout>
+<x-public-layout>
     <div>
         <div>
             <div>
@@ -36,4 +36,4 @@
 
         <a href="{{ route('company.edit') }}">Ändra Profil</a>
     </div>
-</x-layout>
+</x-public-layout>

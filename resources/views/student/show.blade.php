@@ -1,4 +1,4 @@
-<x-layout>
+<x-public-layout>
     <div class="w-full flex justify-center px-4 py-10 lg:w-[1512px] lg:h-[1407px] lg:p-20 lg:inline-flex lg:flex-col lg:justify-start lg:items-center lg:gap-2.5">
         <div class="w-96 p-6 bg-blue rounded-2xl flex flex-col justify-start items-center gap-6 lg:w-[600px] lg:p-10">
            
@@ -62,5 +62,4 @@
         </div>
     </div>
 
-</x-layout>
-
+</x-public-layout>

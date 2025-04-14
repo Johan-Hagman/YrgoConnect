@@ -1,4 +1,4 @@
-<x-layout>
+<x-public-layout>
     <div>
         <form method="POST" action="{{ route('student.update', $student) }}" enctype="multipart/form-data">
             @csrf
@@ -58,4 +58,4 @@
             <a href="{{ route('student.show') }}">Avbryt</a>
         </form>
     </div>
-</x-layout>
+</x-public-layout>

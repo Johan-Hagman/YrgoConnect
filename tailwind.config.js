@@ -10,6 +10,9 @@ export default {
     ],
 
     theme: {
+        accentColor: {
+            customblue: "#001a52",
+        },
         extend: {
             fontFamily: {
                 sans: ["Inter", ...defaultTheme.fontFamily.sans],

@@ -106,7 +106,7 @@
                 Ta chansen att träffa branschens nyaste stjärnor!
             </h1>
     
-          <div class="flex flex-col items-start gap-6 lg:max-w-[892px] w-full">
+          <div class="flex flex-col items-center gap-6 lg:max-w-[892px] w-full">
             <!-- Mobilversion -->
             <img 
                 src="{{ asset('icons/Bar-Step-2-mobile.svg') }}" 
@@ -194,7 +194,7 @@
             Ta chansen att hitta din framtida LIA-plats!
         </h1>
 
-        <div class="flex flex-col items-start gap-6 lg:max-w-[892px] w-full">
+        <div class="flex flex-col items-center gap-6 lg:max-w-[892px] w-full">
             <!-- Mobilversion -->
             <img 
                 src="{{ asset('icons/Bar-Step-2-mobile.svg') }}" 
@@ -222,7 +222,7 @@
 <label class="text-white text-base font-extrabold font-sans leading-snug mb-1">
     Utbildning <span class="text-red">*</span>
 </label>
-<div class="flex flex-col justify-start items-center gap-8 mb-2 lg flex-row">
+<div class="flex flex-col justify-start items-center gap-8 mb-2 lg:flex-row">
     <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white inline-flex items-center gap-2 cursor-pointer">
         <span class="text-white text-base font-medium">Webbutvecklare</span>
         <input type="radio" wire:model="class" value="Webbutvecklare" class="form-radio text-red border-white">
@@ -283,7 +283,7 @@
                 Ta chansen att träffa branschens nyaste stjärnor!
             </h1>
     
-            <div class="flex flex-col items-start gap-6 lg:max-w-[892px] w-full">
+            <div class="flex flex-col items-center gap-6 lg:max-w-[892px] w-full">
                 <!-- Mobilversion -->
                 <img 
                     src="{{ asset('icons/Bar-Step-3-mobile.svg') }}" 
@@ -392,7 +392,8 @@
             <h1 class="text-white text-3xl font-normal leading-9 font-sans lg:text-6xl lg:leading-[72px]">
                 Ta chansen att hitta din framtida LIA-plats!
             </h1>
-        
+            <div class="flex flex-col items-center gap-6 lg:max-w-[892px] w-full">
+
              <!-- Mobilversion -->
              <img 
              src="{{ asset('icons/Bar-Step-3-mobile.svg') }}" 
@@ -407,6 +408,8 @@
              class="hidden lg:block lg:w-[863px]" 
          />
         
+            </div>
+
             <!-- Kompetensval -->
             <label class="text-white text-base font-extrabold font-sans leading-snug mt-4 mb-1">
                 Jag är intresserad av LIA inom <span class="text-red">*</span>
@@ -497,6 +500,8 @@
                 Nästan klar! <br />Ser allt bra ut?
             </h1>
     
+            <div class="flex flex-col items-center gap-6 lg:max-w-[892px] w-full">
+
             <!-- Mobilversion -->
             <img 
                 src="{{ asset('icons/Bar-Step-4-mobile.svg') }}" 
@@ -511,6 +516,8 @@
                 class="hidden lg:block lg:w-[863px]" 
             />
     
+            </div>
+
             @if($role === 'company')
                 @if($image && method_exists($image, 'temporaryUrl'))
                     <div class="w-44 h-48 p-2 bg-white rounded-lg flex flex-col justify-center items-center gap-2">

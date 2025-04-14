@@ -1,38 +1,66 @@
 <x-layout>
-    <div>
-        <div>
-            <div class="imageContainer">
-                <img src="{{ asset('storage/' . $student->image_url ?: 'default_image.jpg') }}" alt="Bild på studenten {{ $student->name }}">
+    <div class="w-full flex justify-center px-4 py-10 lg:w-[1512px] lg:h-[1407px] lg:p-20 lg:inline-flex lg:flex-col lg:justify-start lg:items-center lg:gap-2.5">
+        <div class="w-96 p-6 bg-blue rounded-2xl flex flex-col justify-start items-center gap-6 lg:w-[600px] lg:p-10">
+           
+            <div class="w-full h-80 flex flex-col justify-start items-start gap-2.5 lg:self-stretch lg:h-[520px]">
+                <div class="w-full h-full bg-white rounded-2xl overflow-hidden">
+                    <img src="{{ asset('storage/' . $student->image_url ?: 'default_image.jpg') }}" 
+                         alt="Bild på studenten {{ $student->name }}" 
+                         class="w-full h-full object-cover">
+                </div>
             </div>
 
-            <h1>{{ $student->name }}</h1>
-            <h4>{{ $student->classModel->name}}</h4>
-            <a href="{{ $student->website_url }}">Länk till portfolio eller github</a>
-            
-            <p>{{ $student->description }}</p>
+            <div class="w-full flex flex-col justify-start items-start gap-4 text-white lg:self-stretch">
+                <div class="w-full flex flex-col gap-2 lg:self-stretch">
+                    <h1 class="text-xl font-semibold leading-7">{{ $student->name }}</h1>
+                    <p class="text-base font-extrabold leading-snug">{{ $student->classModel->name }}</p>
+                    <a href="{{ $student->website_url }}" target="_blank" class="underline font-medium leading-snug">Länk till portfolio eller github</a>
+                </div>
 
-            @if ($student->cv_url)
-                <a href="{{ asset('storage/' . $student->cv_url) }}" target="_blank">Ladda ned CV</a>
-            @else
-                <p>Inget CV uppladdat</p>
-            @endif
+                <p class="text-base font-normal leading-normal">{{ $student->description }}</p>
 
-            @if ($student->linkedin_url)
-                <a href="{{ $student->linkedin_url }}" target="_blank">Länk till LinkedIn-profil</a>
-            @else
-                <p>Ingen LinkedIn-profil angiven</p>
-            @endif
+                @if ($student->cv_url)
+                    <a href="{{ asset('storage/' . $student->cv_url) }}" target="_blank" class="underline font-medium leading-snug">Ladda ned CV</a>
+                @else
+                    <p class="text-base italic">Inget CV uppladdat</p>
+                @endif
 
-            @if ($student->competences->isNotEmpty())
-                <ul class="list-disc list-inside">
-                    @foreach ($student->competences as $competence)
-                        <li>{{ $competence->name }}</li>
-                    @endforeach
-                </ul>
-            @else
-                <p>Inga kompetenser listade</p>
-            @endif
+                @if ($student->linkedin_url)
+                    <a href="{{ $student->linkedin_url }}" target="_blank" class="underline font-medium leading-snug">Länk till LinkedIn-profil</a>
+                @else
+                    <p class="text-base italic">Ingen LinkedIn-profil angiven</p>
+                @endif
+
+                <div class="w-full flex flex-col gap-2">
+                    <p class="text-base font-extrabold leading-snug">E-postadress:</p>
+                    <p class="text-base font-normal leading-normal">{{ $student->email }}</p>
+                </div>
+
+                <div class="w-full flex flex-col gap-2">
+                    <p class="text-base font-extrabold leading-snug">Kompetenser:</p>
+                    @if ($student->competences->isNotEmpty())
+                        <ul class="flex flex-wrap gap-2">
+                            @foreach ($student->competences as $competence)
+                                <li class="px-4 py-2 rounded-[30px] outline outline-1 outline-white text-sm leading-none">
+                                    {{ $competence->name }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="text-base italic">Inga kompetenser listade</p>
+                    @endif
+                </div>
+            </div>
+            <div class="w-full flex justify-end">
+                <a href="{{ route('student.edit') }}" 
+                   role="button"
+                   class="p-4 rounded-[40px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
+                   <span class="justify-start text-white text-base font-medium font-sans leading-none">Ändra profil</span>
+                   <img src="{{ asset('icons/Arrow-Right.svg') }}" alt="Registrera" class="w-6 h-6">
+                </a>
+            </div>
         </div>
-        <a href="{{ route('student.edit') }}">Ändra profil</a>
     </div>
+
 </x-layout>
+

@@ -35,4 +35,14 @@ class Company extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function classes()
+    {
+        return $this->belongsToMany(YrgoClass::class, 'company_class_junction', 'company_id', 'class_id');
+    }
+
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favoritable');
+    }
 }

@@ -61,7 +61,11 @@ class CompanyController extends Controller
     {
         $company = auth()->user()->company;
 
-        return view('company.edit', compact('company'));
+        $company->load('classes');
+
+        $selectedClasses = $company->classes->pluck('name')->toArray();
+
+        return view('company.edit', compact('company', 'selectedClasses'));
     }
 
     public function update(Request $request)
@@ -83,6 +87,13 @@ class CompanyController extends Controller
             $company->image_url = $imagePath;
         }
 
+        if ($request->has('classes')) {
+            $classIds = \App\Models\YrgoClass::whereIn('name', $request->classes)->pluck('id');
+            $company->classes()->sync($classIds);
+        } else {
+            $company->classes()->detach();
+        }
+
         $company->update($request->only([
             'name',
             'city',
@@ -91,6 +102,17 @@ class CompanyController extends Controller
             'description',
             'attendance',
         ]));
+
+        $company->attendance = $request->has('attendance');
+
+        $company->save();
+
+        if ($request->has('competences')) {
+            $competenceIds = \App\Models\Competence::whereIn('name', $request->competences)->pluck('id');
+            $company->competences()->sync($competenceIds);
+        } else {
+            $company->competences()->detach();
+        }
 
         return redirect()->route('company.show')->with('success', 'Profilen har uppdaterats.');
     }

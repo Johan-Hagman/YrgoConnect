@@ -15,8 +15,7 @@
                             <img src="{{ asset('/icons/proicons_home.svg') }}" alt="Startsida" class="w-6 h-6" />
                             <span class="hidden lg:block font-medium text-base leading-none">Hem</span>
                         </a>
-                    </div>
-                    
+                    </div> 
 
                     <!-- Favoriter -->
                     <div class="flex flex-col items-center gap-2">
@@ -38,8 +37,13 @@
                     x-show="open"
                     x-cloak
                     @click.outside="open = false"
-                    x-transition
-                    class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded shadow z-50"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 translate-y-2"
+                    class="absolute right-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-2xl shadow-lg z-50 overflow-hidden"
                 >
                     @auth
                         @php

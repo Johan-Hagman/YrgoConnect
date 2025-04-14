@@ -1,3 +1,5 @@
 <div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
+    <button wire:click="toggleFavorite" class="btn {{ $isFavorited ? 'btn-danger' : 'btn-outline-primary' }}">
+        {{ $isFavorited ? 'Remove from Favorites' : 'Add to Favorites' }}
+    </button>
 </div>

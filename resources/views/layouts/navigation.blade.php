@@ -19,8 +19,10 @@
 
                     <!-- Favoriter -->
                     <div class="flex flex-col items-center gap-2">
-                        <img src="{{ asset('/icons/heart-icon.svg') }}" alt="Favoriter" class="w-6 h-6" />
-                        <span class="hidden lg:block font-medium text-base leading-none">Favoriter</span>
+                        <a href="{{ route('favorites.index') }}" class="flex flex-col items-center gap-2">
+                            <img src="{{ asset('/icons/heart-icon.svg') }}" alt="Favoriter" class="w-6 h-6" />
+                            <span class="hidden lg:block font-medium text-base leading-none">Favoriter</span>
+                        </a>
                     </div>
                 </div>
             @endauth

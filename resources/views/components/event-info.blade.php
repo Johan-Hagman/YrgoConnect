@@ -11,7 +11,7 @@
             <img class="w-full max-w-md h-96 rounded-2xl object-cover
                         xl:w-[530px] xl:h-[530px] xl:max-w-none"
                 src="{{ asset('icons/event-image.png') }}"
-                alt="Event image">
+                alt="Bild på folksamling på ett event">
 
             <!-- Event info -->
             <div class="w-full max-w-md px-8 flex flex-col justify-start items-center gap-6

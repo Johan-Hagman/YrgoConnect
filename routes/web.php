@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\FavoriteController;
 use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,7 @@ Route::resource('companies', CompanyController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/student/show', [StudentController::class, 'show'])->name('student.show');
+    Route::get('/student/index', [StudentController::class, 'index'])->name('student.index');
     Route::get('/student/edit', [StudentController::class, 'edit'])->name('student.edit');
     Route::patch('/student/show', [StudentController::class, 'update'])->name('student.update');
 });
@@ -44,6 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/company/show', [CompanyController::class, 'show'])->name('company.show');
     Route::get('/company/edit', [CompanyController::class, 'edit'])->name('company.edit');
     Route::patch('/company/show', [CompanyController::class, 'update'])->name('company.update');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 });
 
 

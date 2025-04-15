@@ -28,7 +28,7 @@ class="hidden lg:block lg:w-[863px]"
         <!-- Role selection -->
         <div class="flex flex-col gap-2">
             <div class="inline-flex items-center gap-2">
-                <label class="text-white text-base font-extrabold font-sans">Jag är:</label>
+                <p class="text-white text-base font-extrabold font-sans">Jag är:</p>
                 <span class="text-red text-base font-extrabold">*</span>
             </div>
 
@@ -50,10 +50,10 @@ class="hidden lg:block lg:w-[863px]"
         <!-- Email input -->
         <div class="flex flex-col gap-2 lg:w-[872px]">
             <div class="inline-flex items-center gap-2">
-                <label class="text-white text-base font-extrabold font-sans">E-postadress</label>
+                <label class="text-white text-base font-extrabold font-sans" for="email">E-postadress</label>
                 <span class="text-red text-base font-extrabold">*</span>
             </div>
-            <input type="email" wire:model.lazy="email" placeholder="exempel@mail.com" required
+            <input type="email" wire:model.lazy="email" id="email" placeholder="exempel@mail.com" required
                    class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium">
             @error('email') <span class="text-sm text-red">{{ $message }}</span> @enderror
         </div>
@@ -61,18 +61,18 @@ class="hidden lg:block lg:w-[863px]"
         <!-- Password input -->
         <div class="flex flex-col gap-2 lg:w-[872px]">
             <div class="inline-flex items-center gap-2">
-                <label class="text-white text-base font-extrabold font-sans">Lösenord</label>
+                <label class="text-white text-base font-extrabold font-sans" for="password">Lösenord</label>
                 <span class="text-red text-base font-extrabold">*</span>
             </div>
-            <input type="password" wire:model.lazy="password" placeholder="********" required
+            <input type="password" wire:model.lazy="password" id="password" placeholder="********" required
                    class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium">
             @error('password') <span class="text-sm text-red">{{ $message }}</span> @enderror
         </div>
 
         <!-- Confirm Password input -->
         <div class="flex flex-col gap-2 lg:w-[872px]">
-            <label class="text-white text-base font-extrabold font-sans">Bekräfta lösenord</label>
-            <input type="password" wire:model.lazy="password_confirmation" placeholder="********"
+            <label class="text-white text-base font-extrabold font-sans" for="password">Bekräfta lösenord</label>
+            <input type="password" id="password-confirm" wire:model.lazy="password_confirmation" placeholder="********"
                    class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium">
         </div>
 

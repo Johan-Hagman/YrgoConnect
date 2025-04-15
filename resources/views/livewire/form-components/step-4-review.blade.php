@@ -37,7 +37,9 @@
             </div>
             <div>
                 <p class="text-white text-base font-extrabold leading-tight mb-1">Jag är:</p>
-                <p class="text-white text-base font-normal leading-snug">{{ $role }}</p>
+                <p class="text-white text-base font-normal leading-snug">
+                    {{ $role === 'company' ? 'Företag' : ($role === 'student' ? 'Student' : 'Okänd roll') }}
+                </p>
             </div>
             <div>
                 <p class="text-white text-base font-extrabold leading-tight mb-1">E-postadress:</p>

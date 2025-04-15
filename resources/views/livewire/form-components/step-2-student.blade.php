@@ -25,7 +25,7 @@
     <label class="text-white text-base font-extrabold font-sans leading-snug mb-1">
         För- och efternamn <span class="text-red">*</span>
     </label>
-    <input type="text" wire:model="name" required placeholder="Exempel Exempel"
+    <input type="text" wire:model="name" required placeholder="Förnamn Efternamn"
            class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium mb-4">
 
 <!-- Utbildning -->
@@ -62,7 +62,7 @@ Utbildning <span class="text-red">*</span>
     <label class="text-white text-base font-extrabold font-sans leading-snug mb-1">
         Länk till portfolio eller github <span class="text-red">*</span>
     </label>
-    <input type="url" wire:model="website_url" required placeholder="www.portfolio.se"
+    <input type="url" wire:model="website_url" required placeholder="https://www.portfolio.se"
            class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium mb-6">
     @error('website_url') <span class="text-sm text-red">{{ $message }}</span> @enderror
 

@@ -8,7 +8,7 @@
     </div>
 
     <!-- Filter -->
-    <div class="w-96 p-4 flex flex-col justify-start items-start gap-4 lg:px-0 lg:w-full lg:w-full lg:gap-12">
+    <div class="w-96 p-4 flex flex-col justify-start items-start gap-4 lg:px-0 lg:w-full lg:gap-12">
         <div class="self-stretch flex flex-col justify-start items-start gap-2">
             <div class="self-stretch justify-start text-neutral-900 text-2xl font-bold leading-loose lg:text-3xl lg:font-medium lg:leading-10">Filtrera</div>
             <div class="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-neutral-900"></div>
@@ -26,8 +26,8 @@
     </div>
 
     <!-- Grid med studentkort -->
-    <div class="pb-10 flex flex-col justify-start items-center gap-6 lg:pb-20 lg:w-full">
-        <div class="py-6 flex flex-col justify-start items-center gap-6 lg:pb-20 lg:w-full">
+    <div class="w-full flex flex-col items-center gap-6">
+        <div class="flex flex-wrap justify-center gap-6 px-4 lg:px-20">
             <div class="py-6 flex flex-col justify-start items-start lg:grid lg:grid-cols-3 lg:gap-6 lg:w-full">
                 @foreach ($students as $index => $student)
                     <div class="w-96 p-4 inline-flex justify-center items-center gap-2.5 lg:w-auto
@@ -35,9 +35,14 @@
                         <x-student-card 
                             :image-url="$student->image_url"
                             :name="$student->name"
-                            :title="$student->classModel?->name"
-                            :link="$student->website_url"
+                            :classes="$student->classModel?->name"
+                            :website-url="$student->website_url"
                             :description="$student->description"
+                            :cv-url="$student->cv_url"
+                            :linkedin-url="$student->linkedin_url"
+                            :email="$student->email"
+                            :skills="$student->skills?->pluck('name')->toArray() ?? []"
+
                         />
                     </div>
                 @endforeach
@@ -45,7 +50,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="self-stretch px-6 pb-10 inline-flex justify-between items-center lg:px-0 lg:justify-between">
+        <div class="self-stretch px-6 pb-10 inline-flex justify-between items-center lg:px-20 lg:justify-between">
             @if ($students->onFirstPage())
                 <span class="p-4 rounded-[40px] outline outline-1 outline-sky-950 flex items-center gap-2.5 opacity-50 cursor-not-allowed">
                     <img src="/icons/Arrow-Left-Blue.svg" alt="Föregående" class="w-6 h-6">
@@ -57,7 +62,7 @@
                     <span class="text-sky-950 text-base font-medium">Föregående</span>
                 </a>
             @endif
-        
+
             @if ($students->hasMorePages())
                 <a href="{{ $students->nextPageUrl() }}" class="p-4 rounded-[40px] outline outline-1 outline-sky-950 flex items-center gap-2.5">
                     <span class="text-sky-950 text-base font-medium">Nästa sida</span>
@@ -70,7 +75,7 @@
                 </span>
             @endif
         </div>
-        
     </div>
 </div>
 @endif
+

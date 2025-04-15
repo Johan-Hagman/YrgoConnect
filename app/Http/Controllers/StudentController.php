@@ -94,6 +94,13 @@ class StudentController extends Controller
             'linkedin_url',
         ]));
 
+        if ($request->filled('class')) {
+            $classId = \App\Models\YrgoClass::where('name', $request->class)->value('id');
+            if ($classId) {
+                $student->class_id = $classId;
+            }
+        }
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('student_images', 'public');
             $student->image_url = $path;

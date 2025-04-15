@@ -4,8 +4,6 @@
 
     <x-event-info />
 
- 
-
     @if(auth()->user()->role->name === 'Företag')
     <x-student-cards-section />
 @elseif(auth()->user()->role->name === 'Student')

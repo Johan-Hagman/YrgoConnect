@@ -20,37 +20,31 @@
 
                 <p class="text-base font-normal leading-normal">{{ $student->description }}</p>
 
-                @if ($student->cv_url)
-                    <a href="{{ asset('storage/' . $student->cv_url) }}" target="_blank" class="underline font-medium leading-snug">Ladda ned CV</a>
-                @else
-                    <p class="text-base italic">Inget CV uppladdat</p>
-                @endif
-
                 @if ($student->linkedin_url)
-                    <a href="{{ $student->linkedin_url }}" target="_blank" class="underline font-medium leading-snug">Länk till LinkedIn-profil</a>
+                <a href="{{ $student->linkedin_url }}" target="_blank" class="underline font-medium leading-snug">Länk till LinkedIn-profil</a>
                 @else
-                    <p class="text-base italic">Ingen LinkedIn-profil angiven</p>
+                <p class="text-base italic">Ingen LinkedIn-profil angiven</p>
                 @endif
-
-                <div class="w-full flex flex-col gap-2">
-                    <p class="text-base font-extrabold leading-snug">E-postadress:</p>
-                    <p class="text-base font-normal leading-normal">{{ $student->email }}</p>
-                </div>
-
+                
                 <div class="w-full flex flex-col gap-2">
                     <p class="text-base font-extrabold leading-snug">Kompetenser:</p>
-                    @if ($student->competences->isNotEmpty())
-                        <ul class="flex flex-wrap gap-2">
-                            @foreach ($student->competences as $competence)
-                                <li class="px-4 py-2 rounded-[30px] outline outline-1 outline-white text-sm leading-none">
-                                    {{ $competence->name }}
-                                </li>
+                        @if($student->competences->count() > 0)
+                        <ul>
+                            @foreach($student->competences as $competence)
+                                <li>{{ $competence->name }}</li>
                             @endforeach
                         </ul>
                     @else
                         <p class="text-base italic">Inga kompetenser listade</p>
                     @endif
                 </div>
+                
+                @if ($student->cv_url)
+                    <a href="{{ asset('storage/' . $student->cv_url) }}" target="_blank" class="underline font-medium leading-snug">Ladda ned CV</a>
+                @else
+                    <p class="text-base italic">Inget CV uppladdat</p>
+                @endif
+
             </div>
             <div class="w-full flex justify-end">
                 <a href="{{ route('student.edit') }}" 

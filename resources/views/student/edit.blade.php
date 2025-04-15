@@ -82,7 +82,7 @@
                 
                 {{-- Kompetenser --}}
                 <div class="w-full flex flex-col gap-2">
-                    <label class="text-white text-base font-extrabold leading-snug">Kompetenser:</label>
+                    <p class="text-white text-base font-extrabold leading-snug">Kompetenser:</p>
                     <div class="flex flex-wrap gap-2" x-data="{ selectedClass: '{{ $student->classModel->name }}' }">
                         {{-- Web Developer Competences --}}
                         @foreach(['Backend', 'Frontend', 'Fullstack'] as $competence)

@@ -29,7 +29,7 @@
         <div class="flex flex-wrap justify-center gap-6 px-4 lg:px-20">
             <div class="py-6 flex flex-col justify-start items-start lg:grid lg:grid-cols-3 lg:gap-6 lg:w-full">
             @foreach ($companies as $index => $company)
-                <div class="w-96 p-4 inline-flex justify-center items-center gap-2.5 lg:w-auto
+                <div class="w-96 inline-flex justify-center items-center gap-2.5 lg:w-auto
                             {{ $index >= 5 ? 'hidden lg:inline-flex' : '' }}">
                     <x-company-card 
                         :image-url="$company->image_url"
@@ -45,7 +45,7 @@
         </div>
         
         <!-- Pagination -->
-        <div class="self-stretch px-6 pb-10 inline-flex justify-between items-center lg:px-0 lg:justify-between">
+        <div class="self-stretch px-6 pb-10 inline-flex justify-between items-center lg:px-20 lg:justify-between">
             @if ($companies->onFirstPage())
                 <span class="p-4 rounded-[40px] outline outline-1 outline-sky-950 flex items-center gap-2.5 opacity-50 cursor-not-allowed">
                     <img src="/icons/Arrow-Left-Blue.svg" alt="Föregående" class="w-6 h-6">

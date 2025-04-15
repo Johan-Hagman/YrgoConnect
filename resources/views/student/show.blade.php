@@ -28,10 +28,12 @@
                 
                 <div class="w-full flex flex-col gap-2">
                     <p class="text-base font-extrabold leading-snug">Kompetenser:</p>
-                        @if($student->competences->count() > 0)
-                        <ul>
+                    @if($student->competences->isNotEmpty())
+                        <ul class="flex flex-wrap gap-2">
                             @foreach($student->competences as $competence)
-                                <li>{{ $competence->name }}</li>
+                                <li class="px-4 py-2 rounded-[30px] outline outline-1 outline-white text-sm leading-none">
+                                    {{ $competence->name }}
+                                </li>
                             @endforeach
                         </ul>
                     @else

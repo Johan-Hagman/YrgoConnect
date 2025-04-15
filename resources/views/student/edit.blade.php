@@ -79,8 +79,27 @@
                        class="w-full h-11 px-5 py-3 bg-white rounded-lg text-black font-medium underline" />
                 
                        {{-- Kompetenser --}}
-                       <p class="text-base font-extrabold leading-snug">Kompetenser:</p>
+                       @php
+                            $allCompetences = ['Backend', 'Frontend', 'Fullstack', 'Motion Design', 'UX/UI', '3D', 'Webflow/Framer', 'Branding', 'Content Creation'];
+                            $selectedCompetences = $student->competences->pluck('name')->toArray();
+                        @endphp
 
+                        <div class="w-full flex flex-col gap-2">
+                            <label class="text-white text-base font-extrabold leading-snug">Kompetenser:</label>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach($allCompetences as $competence)
+                                    <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-offset-[-1px] outline-white flex items-center gap-2 text-white">
+                                        <span class="text-base font-medium leading-none">{{ $competence }}</span>
+                                        <input type="checkbox" name="competences[]" value="{{ $competence }}"
+                                            {{ in_array($competence, $selectedCompetences) ? 'checked' : '' }}
+                                            class="w-5 h-5 rounded border-white bg-white text-red focus:ring-0 focus:ring-offset-0">
+                                    </label>
+                                @endforeach
+                            </div>
+                            @error('competences')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                 {{-- CV --}}
                 <label class="font-extrabold leading-snug mt-4" for="cv">Ladda upp CV:</label>

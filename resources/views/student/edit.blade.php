@@ -73,7 +73,15 @@
                         <span x-text="count"></span>/240 tecken
                     </span>
                 </div>
+                {{-- LinkedIn --}}
+                <label class="font-extrabold leading-snug mt-4" for="linkedin_url">Länk till LinkedIn-profil:</label>
+                <input type="url" name="linkedin_url" id="linkedin_url" value="{{ old('linkedin_url', $student->linkedin_url) }}"
+                       class="w-full h-11 px-5 py-3 bg-white rounded-lg text-black font-medium underline" />
                 
+                       {{-- Kompetenser --}}
+                       <p class="text-base font-extrabold leading-snug">Kompetenser:</p>
+
+
                 {{-- CV --}}
                 <label class="font-extrabold leading-snug mt-4" for="cv">Ladda upp CV:</label>
                 <input type="file" name="cv" accept="application/pdf">
@@ -85,29 +93,8 @@
                     </p>
                 @endif
 
-                {{-- LinkedIn --}}
-                <label class="font-extrabold leading-snug mt-4" for="linkedin_url">Länk till LinkedIn-profil:</label>
-                <input type="url" name="linkedin_url" id="linkedin_url" value="{{ old('linkedin_url', $student->linkedin_url) }}"
-                       class="w-full h-11 px-5 py-3 bg-white rounded-lg text-black font-medium underline" />
 
-                {{-- E-post --}}
-                <label class="font-extrabold leading-snug mt-4">E-postadress:</label>
-                <div class="w-full h-11 px-5 py-3 bg-white rounded-lg flex items-center">
-                    <span class="text-black font-medium">{{ $student->user->email }}</span>
-                </div>
 
-                {{-- Kompetenser --}}
-                {{-- <label class="font-extrabold leading-snug mt-4">Kompetenser:</label>
-                <div class="flex flex-wrap gap-2">
-                    @foreach($availableCompetences as $competence)
-                        <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-offset-[-1px] outline-white flex items-center gap-2 text-white">
-                            <span class="text-base font-medium leading-none">{{ $competence }}</span>
-                            <input type="checkbox" name="competences[]" value="{{ $competence }}"
-                                   {{ in_array($competence, json_decode($student->competences)) ? 'checked' : '' }}
-                                   class="w-5 h-5 rounded border-white bg-white text-red focus:ring-0 focus:ring-offset-0">
-                        </label>
-                    @endforeach
-                </div> --}}
             </div>
 
             {{-- KNAPP --}}

@@ -37,13 +37,13 @@
 
                 {{-- Klass --}}
                 <label class="font-extrabold leading-snug mt-4">Utbildning:</label>
-                <div class="flex flex-wrap gap-2" x-data="{ selectedClass: '{{ $student->classModel->name }}' }" 
-                    x-on:change="selectedClass = $event.target.value">
+                <div x-data="{ selectedClass: '{{ $student->classModel->name }}' }" class="flex flex-wrap gap-2">
                     @foreach(['Webbutvecklare', 'Digital Designer'] as $class)
                         <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-white flex items-center gap-2">
                             <span>{{ $class }}</span>
                             <input type="radio" name="class" value="{{ $class }}" 
                                 {{ $student->classModel->name == $class ? 'checked' : '' }}
+                                x-on:change="selectedClass = $event.target.value"
                                 class="form-radio text-red border-white">
                         </label>
                     @endforeach
@@ -80,35 +80,36 @@
                 <input type="url" name="linkedin_url" id="linkedin_url" value="{{ old('linkedin_url', $student->linkedin_url) }}"
                        class="w-full h-11 px-5 py-3 bg-white rounded-lg text-black font-medium underline" />
                 
-                       {{-- Kompetenser --}}
-                        @php
-                            $webCompetences = ['Backend', 'Frontend', 'Fullstack'];
-                            $designCompetences = ['Motion Design', 'UX/UI', '3D', 'Webflow/Framer', 'Branding', 'Content Creation'];
-                            $selectedCompetences = $student->competences->pluck('name')->toArray();
-                        @endphp
-
-                            <div class="w-full flex flex-col gap-2" x-data="{ 
-                                webCompetences: {{ json_encode($webCompetences) }},
-                                designCompetences: {{ json_encode($designCompetences) }},
-                                getCompetences() {
-                                    return this.selectedClass === 'Webbutvecklare' ? this.webCompetences : this.designCompetences;
-                                }
-                            }">
-                                <label class="text-white text-base font-extrabold leading-snug">Kompetenser:</label>
-                                <div class="flex flex-wrap gap-2">
-                                    <template x-for="competence in getCompetences()" :key="competence">
-                                        <label class="px-4 py-2 rounded-[30px] outline outline-1 outline-offset-[-1px] outline-white flex items-center gap-2 text-white">
-                                            <span class="text-base font-medium leading-none" x-text="competence"></span>
-                                            <input type="checkbox" name="competences[]" :value="competence"
-                                                :checked="{{ json_encode($selectedCompetences) }}.includes(competence)"
-                                                class="w-5 h-5 rounded border-white bg-white text-red focus:ring-0 focus:ring-offset-0">
-                                        </label>
-                                    </template>
-                                </div>
-                                @error('competences')
-                                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
+                {{-- Kompetenser --}}
+                <div class="w-full flex flex-col gap-2">
+                    <label class="text-white text-base font-extrabold leading-snug">Kompetenser:</label>
+                    <div class="flex flex-wrap gap-2" x-data="{ selectedClass: '{{ $student->classModel->name }}' }">
+                        {{-- Web Developer Competences --}}
+                        @foreach(['Backend', 'Frontend', 'Fullstack'] as $competence)
+                            <label x-show="selectedClass === 'Webbutvecklare'" 
+                                class="px-4 py-2 rounded-[30px] outline outline-1 outline-white flex items-center gap-2 text-white">
+                                <span class="text-base font-medium leading-none">{{ $competence }}</span>
+                                <input type="checkbox" name="competences[]" value="{{ $competence }}"
+                                    {{ in_array($competence, $student->competences->pluck('name')->toArray()) ? 'checked' : '' }}
+                                    class="w-5 h-5 rounded border-white bg-white text-red focus:ring-0 focus:ring-offset-0">
+                            </label>
+                        @endforeach
+                        
+                        {{-- Digital Designer Competences --}}
+                        @foreach(['Motion Design', 'UX/UI', '3D', 'Webflow/Framer', 'Branding', 'Content Creation'] as $competence)
+                            <label x-show="selectedClass === 'Digital Designer'" 
+                                class="px-4 py-2 rounded-[30px] outline outline-1 outline-white flex items-center gap-2 text-white">
+                                <span class="text-base font-medium leading-none">{{ $competence }}</span>
+                                <input type="checkbox" name="competences[]" value="{{ $competence }}"
+                                    {{ in_array($competence, $student->competences->pluck('name')->toArray()) ? 'checked' : '' }}
+                                    class="w-5 h-5 rounded border-white bg-white text-red focus:ring-0 focus:ring-offset-0">
+                            </label>
+                        @endforeach
+                    </div>
+                    @error('competences')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
 
                 {{-- CV --}}
                 <label class="font-extrabold leading-snug mt-4" for="cv">Ladda upp CV:</label>

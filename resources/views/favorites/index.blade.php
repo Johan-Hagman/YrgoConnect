@@ -2,7 +2,7 @@
 <x-app-layout>
     <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-bold mb-6">My Favorites</h1>
+            <h1 class="text-2xl font-bold mb-6">Mina favoriter</h1>
             
             <div class="mb-8">
                 <h2 class="text-xl font-semibold mb-4">Students</h2>

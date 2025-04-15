@@ -18,3 +18,9 @@
             </svg>
     @endif
 </button>
+
+@if (session()->has('error'))
+    <div class="text-red text-sm mt-2">
+        {{ session('error') }}
+    </div>
+@endif

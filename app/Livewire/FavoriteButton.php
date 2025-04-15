@@ -30,28 +30,14 @@ class FavoriteButton extends Component
 
     public function toggleFavorite()
     {
-        // Check if the favoritable item is the current user
-        if ($this->favoritable instanceof \App\Models\User && $this->favoritable->id === auth()->id()) {
-            // You can handle this case with a flash message or just return
-            session()->flash('error', 'You cannot favorite yourself.');
-            return;
-        }
-
-        // Or if specific to Student model and the student belongs to current user
-        if ($this->favoritable instanceof \App\Models\Student && $this->favoritable->user_id === auth()->id()) {
+        if (($this->favoritable instanceof \App\Models\Student && $this->favoritable->user_id === auth()->id()) ||
+            ($this->favoritable->id === auth()->id() && $this->favoritable instanceof \App\Models\User)
+        ) {
             session()->flash('error', 'You cannot favorite your own profile.');
             return;
         }
 
-        if ($this->isFavorited) {
-            // Ta bort favorit
-            $this->removeFavorite();
-        } else {
-            // Lägg till favorit
-            $this->addFavorite();
-        }
-
-        // Uppdatera fav-statusen
+        $this->isFavorited ? $this->removeFavorite() : $this->addFavorite();
         $this->isFavorited = !$this->isFavorited;
     }
 

@@ -60,7 +60,9 @@ php artisan serve
 
 ### Deployment
 [![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F4034333c-60e9-46ac-87f7-8e1186e4d576&style=for-the-badge)](https://forge.laravel.com/servers/907431/sites/2683537)
-Projektet har deployats med Laravel Forge med en Digital Ocean Server
+
+Projektet har deployats med Laravel Forge med en Digital Ocean Server:
+[http://152.42.134.22/](http://152.42.134.22/)
 
 ### 📜 Licens
 Projektet är licenserat under MIT License

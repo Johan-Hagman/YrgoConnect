@@ -100,7 +100,7 @@
         <div class="self-stretch inline-flex justify-center items-end">
             <button @click="open = !open" class="p-4 bg-blue rounded-[40px] outline outline-1 outline-offset-[-1px] outline-white flex justify-center items-center gap-2.5">
                 <div class="text-white text-base font-medium leading-none" x-text="open ? 'Mindre information' : 'Mer information'"></div>
-                <img :class="open ? 'rotate-180' : ''" src="/icons/Arrow-Up.svg" alt="arrow" class="w-6 h-6 transition-transform" />
+                <img src="/icons/Arrow-Down.svg" alt="Pil" class="w-6 h-6 transform transition-transform duration-300" :class="expanded ? 'rotate-0' : 'rotate-180'">
             </button>
         </div>
     </div>

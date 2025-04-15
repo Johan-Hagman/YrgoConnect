@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Favorite;
 use App\Models\Student;
@@ -22,12 +22,27 @@ class FavoriteButton extends Component
 
     public function checkIfFavorited()
     {
-        // Kollar om användaren redan har favoritmarkerat det här objektet
-        return auth()->user()->favorites->contains('favoritable_id', $this->favoritable->id);
+        return auth()->user()->favorites()
+            ->where('favoritable_id', $this->favoritable->id)
+            ->where('favoritable_type', get_class($this->favoritable))
+            ->exists();
     }
 
     public function toggleFavorite()
     {
+        // Check if the favoritable item is the current user
+        if ($this->favoritable instanceof \App\Models\User && $this->favoritable->id === auth()->id()) {
+            // You can handle this case with a flash message or just return
+            session()->flash('error', 'You cannot favorite yourself.');
+            return;
+        }
+
+        // Or if specific to Student model and the student belongs to current user
+        if ($this->favoritable instanceof \App\Models\Student && $this->favoritable->user_id === auth()->id()) {
+            session()->flash('error', 'You cannot favorite your own profile.');
+            return;
+        }
+
         if ($this->isFavorited) {
             // Ta bort favorit
             $this->removeFavorite();

@@ -1,7 +1,8 @@
 <x-public-layout>
-    <div class="w-full flex justify-center px-4 py-10 lg:w-[1512px] lg:h-[1407px] lg:p-20 lg:inline-flex lg:flex-col lg:justify-start lg:items-center lg:gap-2.5">
+    <div class="w-full max-w-[1512px] mx-auto px-4 py-10 flex justify-center lg:h-[1407px] lg:p-20 lg:inline-flex lg:flex-col lg:justify-start lg:items-center lg:gap-2.5">
         <div class="w-96 p-6 bg-blue rounded-2xl flex flex-col justify-start items-center gap-6 lg:w-[600px] lg:p-10">
            
+
             <div class="w-full h-80 flex flex-col justify-start items-start gap-2.5 lg:self-stretch lg:h-[520px]">
                 <div class="w-full h-full bg-white rounded-2xl overflow-hidden">
                     <img src="{{ asset('storage/' . $student->image_url ?: 'default_image.jpg') }}" 

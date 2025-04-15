@@ -4,7 +4,7 @@
     <!-- Logotyp -->
     <div class="flex items-center justify-center lg:justify-start">
         <a href="{{ Auth::check() ? route('dashboard') : url('/') }}">
-            <img src="{{ asset('/icons/bomarke.png') }}" alt="Yrgo logotyp" class="h-4 w-auto lg:h-6" />
+            <img src="{{ asset('/icons/Yrgo.svg') }}" alt="Yrgo logotyp" class="h-4 w-auto lg:h-6" />
         </a>
     </div>
 

@@ -68,7 +68,8 @@ class="text-sm font-normal mb-2"
         Länk till LinkedIn-profil
     </label>
     <input type="url" wire:model="linkedin_url"
-           class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium mb-4">
+           class="w-full h-11 p-4 bg-white rounded-lg text-zinc-600 text-base font-medium mb-4"
+           placeholder="https://www.linkedin.com/">
     @error('linkedin_url') <span class="text-sm text-red">{{ $message }}</span> @enderror
 
     <!-- CV -->

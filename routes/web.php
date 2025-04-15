@@ -4,12 +4,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FavoriteController;
+use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 Route::get('/', function () {
-    return view('welcome');
+    $students = Student::with('classModel')->latest()->take(2)->get();
+
+    return view('welcome', compact('students'));
 });
 
 Route::get('/villkor', function () {
@@ -18,7 +21,8 @@ Route::get('/villkor', function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $students = Student::with('classModel')->latest()->take(2)->get();
+    return view('dashboard', compact('students'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

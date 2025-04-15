@@ -17,7 +17,7 @@
             title="Webbutvecklare"
             link="#"
             description="Vill du ha någon som kan HTML, CSS, JS och Laravel?"
-            size="large"
+            size="small"
         />
     </div>
 

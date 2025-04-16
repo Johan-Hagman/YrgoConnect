@@ -1,7 +1,8 @@
 <section class="w-full px-4 pt-4 pb-20 bg-red flex flex-col lg:flex-row-reverse justify-between items-center gap-10 overflow-hidden lg:px-20 lg:pt-28 lg:pb-0">
 
     <!-- Hero-cardsection -->
-    <div class="w-full sm:px-20 flex justify-center items-center gap-5 overflow-hidden lg:w-[720px] lg:h-[760px] lg:flex-col">
+   <div class="w-full sm:px-20 flex justify-center items-center gap-5 overflow-hidden lg:w-[900px] lg:h-[900px] lg:flex-col">
+
         <video autoplay muted loop playsinline>
             <source src="{{ asset('icons/hero-animation.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.

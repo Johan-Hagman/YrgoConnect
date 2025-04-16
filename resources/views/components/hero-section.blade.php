@@ -25,14 +25,25 @@
 
        <!-- Scroll-knapp -->
        <div
-       onclick="document.getElementById('registerForm').scrollIntoView({ behavior: 'smooth' })"
+       onclick="document.getElementById('{{ auth()->check() ? 'Grid' : 'registerForm' }}').scrollIntoView({ behavior: 'smooth' })"
        class="cursor-pointer p-4 bg-blue rounded-[40px] inline-flex justify-center items-center gap-2.5"
-       >
-        <span class="text-white text-button font-medium font-sans leading-none">
-         Ja, jag vill delta!
-        </span>
-        <img src="{{ asset('icons/Arrow-Down.svg') }}" alt="Pil" class="w-6 h-6" />
-       </div>
+   >
+       <span class="text-white text-button font-medium font-sans leading-none">
+           @auth
+               @if(auth()->user()->role->name === 'Student')
+                   Se Företag
+               @elseif(auth()->user()->role->name === 'Företag')
+                   Se Studenter
+               @else
+                   Se deltagare
+               @endif
+           @else
+               Ja, jag vill delta!
+           @endauth
+       </span>
+       <img src="{{ asset('icons/Arrow-Down.svg') }}" alt="Pil" class="w-6 h-6" />
+   </div>
+   
 
     </div>
 

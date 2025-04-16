@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 <div x-data="{ showClass: false, showSkills: false }" class="py-6 flex flex-col justify-start items-center lg:items-start lg:px-20 lg:gap-10">
     <!-- Titel -->
     <div class="w-full max-w-md px-4 mb-6 lg:max-w-[910px]">
-        <h2 class="text-neutral-900 text-3xl text-center font-normal leading-9 lg:text-6xl lg:leading-[72px] lg:text-left">
+        <h2 id="Grid" class="text-neutral-900 text-3xl text-center font-normal leading-9 lg:text-6xl lg:leading-[72px] lg:text-left">
             Ta en titt på {{ $role === 'Företag' ? 'studenterna' : 'företagen' }} som kommer på eventet:
         </h2>
     </div>

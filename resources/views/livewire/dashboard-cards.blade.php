@@ -72,6 +72,7 @@ use Illuminate\Support\Str;
                                 :linkedinUrl="$item->linkedin_url"
                                 :email="$item->email"
                                 :skills="$item->competences?->pluck('name')->toArray() ?? []"
+                                :student="$item"
                             />
                         @else
                             <x-company-card 

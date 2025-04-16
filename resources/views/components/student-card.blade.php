@@ -9,6 +9,7 @@
     'linkedinUrl' => '',
     'email' => '',
     'skills' => [],
+    'student' => null
 ])
 
 <div 
@@ -32,9 +33,15 @@
         <div class="flex flex-col justify-start items-start gap-2 w-full">
             <div class="flex justify-between items-center w-full">
                 <div class="text-xl font-semibold leading-7">{{ $name }}</div>
-                <div class="w-7 h-5 relative">
-                    <img src="/icons/icon-heart.svg" alt="Hjärta" class="w-full h-full" />
-                </div>
+                @auth
+                @if(auth()->user()->role->name === 'Företag' && $student)
+                    <livewire:favorite-button :favoritable="$student" wire:key="student-{{$student->id}}" />
+                @else
+                    <div class="w-7 h-5 relative">
+                        <img src="/icons/icon-heart.svg" alt="Hjärta" class="w-full h-full" />
+                    </div>
+                @endif
+            @endauth
             </div>
 
             <div class="text-base font-extrabold leading-snug">

@@ -1,24 +1,12 @@
 <section class="w-full px-4 pt-4 pb-20 bg-red flex flex-col lg:flex-row-reverse justify-between items-center gap-10 overflow-hidden lg:px-20 lg:pt-28 lg:pb-0">
 
     <!-- Hero-cardsection -->
-    <div class="w-full max-w-[384px] h-[510px] sm:px-20 flex justify-center items-center gap-5 overflow-hidden lg:w-[720px] lg:h-[760px] lg:px-40 lg:flex-col">
-        <x-student-card
-            initials="F E"
-            name="Förnamn Efternamn"
-            title="Digital Designer"
-            link="#"
-            description="Yrgo, högre yrkesutbildning Göteborg, är en del av utbildningsförvaltningen i Göteborgs Stad och har ett av Sveriges bredaste utbud."
-            size="small"
-        />
+   <div class="w-full sm:px-20 flex justify-center items-center gap-5 overflow-hidden lg:w-[900px] lg:h-[900px] lg:flex-col">
 
-        <x-student-card
-            initials="F E"
-            name="Förnamn Efternamn"
-            title="Webbutvecklare"
-            link="#"
-            description="Vill du ha någon som kan HTML, CSS, JS och Laravel?"
-            size="small"
-        />
+        <video autoplay muted loop playsinline>
+            <source src="{{ asset('icons/hero-animation.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
     </div>
 
     <!-- Text + button -->
@@ -36,13 +24,27 @@
             Välkomna på mingelevent 23 april för att hitta framtida medarbetare.
         </p>
 
-        <!-- button -->
-        <div class="p-4 bg-blue rounded-[40px] inline-flex justify-center items-center gap-2.5">
-            <span class="text-white text-button font-medium font-sans leading-none">
-                Ja, jag vill delta!
-            </span>
-            <img src="{{ asset('icons/Arrow-Down.svg') }}" alt="Pil" class="w-6 h-6" />
-        </div>
+       <!-- Scroll-knapp -->
+       <div
+       onclick="document.getElementById('{{ auth()->check() ? 'Grid' : 'registerForm' }}').scrollIntoView({ behavior: 'smooth' })"
+       class="cursor-pointer p-4 bg-blue rounded-[40px] inline-flex justify-center items-center gap-2.5"
+   >
+       <span class="text-white text-button font-medium font-sans leading-none">
+           @auth
+               @if(auth()->user()->role->name === 'Student')
+                   Se Företag
+               @elseif(auth()->user()->role->name === 'Företag')
+                   Se Studenter
+               @else
+                   Se deltagare
+               @endif
+           @else
+               Ja, jag vill delta!
+           @endauth
+       </span>
+       <img src="{{ asset('icons/Arrow-Down.svg') }}" alt="Pil" class="w-6 h-6" />
+   </div>
+   
 
     </div>
 

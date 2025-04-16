@@ -86,6 +86,7 @@ use Illuminate\Support\Str;
                                 :email="$item->user?->email"
                                 :roles="[$item->role?->name]"
                                 :skills="$item->skills?->pluck('name')->toArray() ?? []"
+                                :company="$item"
                             />
                         @endif
                     </div>

@@ -9,6 +9,7 @@
     'email' => '',
     'roles' => [],
     'skills' => [],
+    'company' => null
 ])
 
 <div x-data="{ open: false }" class="bg-blue rounded-2xl inline-flex flex-col justify-center items-center w-96 p-10 gap-6">
@@ -28,9 +29,15 @@
         <div class="flex flex-col justify-start items-start gap-2 w-full">
             <div class="flex justify-between items-center w-full">
                 <div class="text-xl font-semibold leading-7">{{ $name }}</div>
-                <div class="w-7 h-5 relative">
-                    <img src="/icons/icon-heart.svg" alt="Hjärta" class="w-full h-full" />
-                </div>
+                @auth
+                    @if(auth()->user()->role->name === 'Student' && $company)
+                        <livewire:favorite-button :favoritable="$company" wire:key="company-{{$company->id}}" />
+                    @else
+                        <div class="w-7 h-5 relative">
+                            <img src="/icons/icon-heart.svg" alt="Hjärta" class="w-full h-full" />
+                        </div>
+                    @endif
+                @endauth
             </div>
 
             {{-- Länk --}}

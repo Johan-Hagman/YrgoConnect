@@ -66,19 +66,20 @@
                     </div>
                 @endif
 
-                {{-- Roller --}}
-                @if (!empty($roles))
-                    <div class="flex flex-col gap-2 w-full">
-                        <div class="text-base font-extrabold leading-snug">Vi söker:</div>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach ($roles as $role)
-                                <div class="px-4 py-2 rounded-[30px] outline outline-1 outline-offset-[-1px] outline-white text-base font-medium leading-none">
-                                    {{ $role }}
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
+               {{-- Utbildningar --}}
+@if (!empty($classes))
+<div class="flex flex-col gap-2 w-full">
+    <div class="text-base font-extrabold leading-snug">Vi söker:</div>
+    <div class="flex flex-wrap gap-2">
+        @foreach ($classes as $class)
+            <div class="px-4 py-2 rounded-[30px] outline outline-1 outline-offset-[-1px] outline-white text-base font-medium leading-none">
+                {{ $class }}
+            </div>
+        @endforeach
+    </div>
+</div>
+@endif
+
 
                 {{-- Kompetenser --}}
                 @if (!empty($skills))
@@ -100,7 +101,7 @@
         <div class="self-stretch inline-flex justify-center items-end">
             <button @click="open = !open" class="p-4 bg-blue rounded-[40px] outline outline-1 outline-offset-[-1px] outline-white flex justify-center items-center gap-2.5">
                 <div class="text-white text-base font-medium leading-none" x-text="open ? 'Mindre information' : 'Mer information'"></div>
-                <img src="/icons/Arrow-Down.svg" alt="Pil" class="w-6 h-6 transform transition-transform duration-300" :class="expanded ? 'rotate-0' : 'rotate-180'">
+                <img src="/icons/Arrow-Down.svg" alt="Pil" class="w-6 h-6 transform transition-transform duration-300" :class="open ? 'rotate-180' : 'rotate-0'">
             </button>
         </div>
     </div>

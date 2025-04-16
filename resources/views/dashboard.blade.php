@@ -4,10 +4,6 @@
 
     <x-event-info />
 
-    @if(auth()->user()->role->name === 'Företag')
-    <x-student-cards-section />
-@elseif(auth()->user()->role->name === 'Student')
-    <x-company-cards-section />
-@endif
+    <livewire:dashboard-cards :role="auth()->user()->role->name" />
 
 </x-public-layout>

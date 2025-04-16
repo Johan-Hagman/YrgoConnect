@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Livewire\Livewire;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -22,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::component('layouts.public-layout', 'public-layout');
+        Livewire::component('favorite-button', \App\Livewire\FavoriteButton::class);
     }
 }

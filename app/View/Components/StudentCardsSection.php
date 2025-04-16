@@ -11,7 +11,7 @@ class StudentCardsSection extends Component
 {
     public function render(): View|Closure|string
     {
-        $students = Student::with('classModel')->latest()->paginate(9);
+        $students = Student::with(['classModel', 'competences'])->latest()->paginate(9);
 
         return view('components.student-cards-section', [
             'students' => $students,

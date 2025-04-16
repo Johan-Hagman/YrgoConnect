@@ -45,4 +45,8 @@ class Company extends Model
     {
         return $this->morphMany(Favorite::class, 'favoritable');
     }
+    public function skills()
+    {
+        return $this->competences();
+    }
 }

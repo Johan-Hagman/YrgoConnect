@@ -36,13 +36,16 @@
             Välkomna på mingelevent 23 april för att hitta framtida medarbetare.
         </p>
 
-        <!-- button -->
-        <div class="p-4 bg-blue rounded-[40px] inline-flex justify-center items-center gap-2.5">
-            <span class="text-white text-button font-medium font-sans leading-none">
-                Ja, jag vill delta!
-            </span>
-            <img src="{{ asset('icons/Arrow-Down.svg') }}" alt="Pil" class="w-6 h-6" />
-        </div>
+       <!-- Scroll-knapp -->
+       <div
+       onclick="document.getElementById('registerForm').scrollIntoView({ behavior: 'smooth' })"
+       class="cursor-pointer p-4 bg-blue rounded-[40px] inline-flex justify-center items-center gap-2.5"
+       >
+        <span class="text-white text-button font-medium font-sans leading-none">
+         Ja, jag vill delta!
+        </span>
+        <img src="{{ asset('icons/Arrow-Down.svg') }}" alt="Pil" class="w-6 h-6" />
+       </div>
 
     </div>
 

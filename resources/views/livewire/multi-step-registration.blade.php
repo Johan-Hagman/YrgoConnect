@@ -1,7 +1,7 @@
 <div>
-    <form wire:submit.prevent="submit" enctype="multipart/form-data" class="px-4 py-6 flex flex-col items-center gap-6 lg:px-20 lg:py-20">
+    <form wire:submit.prevent="submit" enctype="multipart/form-data" class="px-4 py-6 flex flex-col items-center gap-6 lg:px-20 lg:py-20" id="registerForm">
         @csrf
-        
+
         @if($step === 1)
         @include('livewire.form-components.step-1-user')
     @endif
